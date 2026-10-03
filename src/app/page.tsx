@@ -44,6 +44,8 @@ export default function LandingPage() {
       gradient: 'from-[#635BFF] via-[#7C3AED] to-[#8B5CF6]',
       glowColor: 'rgba(99, 91, 255, 0.25)',
       badgeColor: 'text-[#635BFF] bg-[#635BFF]/10 border-[#635BFF]/20',
+      hoverBorder: 'hover:border-[#635BFF]/50 hover:shadow-[0_20px_45px_-12px_rgba(99,91,255,0.22)]',
+      hoverTitle: 'group-hover:text-[#635BFF]',
       stat: '⚡ 4.2s Transcode',
       preview: (
         <div className="rounded-2xl bg-white/90 border border-[#635BFF]/15 p-3 shadow-xs flex flex-col justify-between h-[142px]">
@@ -91,6 +93,8 @@ export default function LandingPage() {
       gradient: 'from-[#06B6D4] via-[#0284C7] to-[#3B82F6]',
       glowColor: 'rgba(6, 182, 212, 0.25)',
       badgeColor: 'text-[#06B6D4] bg-[#06B6D4]/10 border-[#06B6D4]/20',
+      hoverBorder: 'hover:border-[#06B6D4]/50 hover:shadow-[0_20px_45px_-12px_rgba(6,182,212,0.22)]',
+      hoverTitle: 'group-hover:text-[#06B6D4]',
       stat: '99.8% Precision',
       preview: (
         <div className="rounded-2xl bg-white/90 border border-[#06B6D4]/15 p-3 shadow-xs flex flex-col justify-between h-[142px]">
@@ -131,6 +135,8 @@ export default function LandingPage() {
       gradient: 'from-[#EC4899] via-[#F43F5E] to-[#FB7185]',
       glowColor: 'rgba(236, 72, 153, 0.25)',
       badgeColor: 'text-[#EC4899] bg-[#EC4899]/10 border-[#EC4899]/20',
+      hoverBorder: 'hover:border-[#EC4899]/50 hover:shadow-[0_20px_45px_-12px_rgba(236,72,153,0.22)]',
+      hoverTitle: 'group-hover:text-[#EC4899]',
       stat: '94 Virality Score',
       preview: (
         <div className="rounded-2xl bg-white/90 border border-[#EC4899]/15 p-3 shadow-xs flex flex-col justify-between h-[142px]">
@@ -168,6 +174,8 @@ export default function LandingPage() {
       gradient: 'from-[#8B5CF6] via-[#7C3AED] to-[#635BFF]',
       glowColor: 'rgba(139, 92, 246, 0.25)',
       badgeColor: 'text-[#8B5CF6] bg-[#8B5CF6]/10 border-[#8B5CF6]/20',
+      hoverBorder: 'hover:border-[#8B5CF6]/50 hover:shadow-[0_20px_45px_-12px_rgba(139,92,246,0.22)]',
+      hoverTitle: 'group-hover:text-[#8B5CF6]',
       stat: '3 Dimensions',
       preview: (
         <div className="rounded-2xl bg-white/90 border border-[#8B5CF6]/15 p-3 shadow-xs flex flex-col justify-between h-[142px]">
@@ -211,6 +219,8 @@ export default function LandingPage() {
       gradient: 'from-[#10B981] via-[#059669] to-[#06B6D4]',
       glowColor: 'rgba(16, 185, 129, 0.25)',
       badgeColor: 'text-[#10B981] bg-[#10B981]/10 border-[#10B981]/20',
+      hoverBorder: 'hover:border-[#10B981]/50 hover:shadow-[0_20px_45px_-12px_rgba(16,185,129,0.22)]',
+      hoverTitle: 'group-hover:text-[#10B981]',
       stat: '4 Platforms',
       preview: (
         <div className="rounded-2xl bg-white/90 border border-[#10B981]/15 p-3 shadow-xs flex flex-col justify-between h-[142px]">
@@ -559,15 +569,10 @@ export default function LandingPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.08 }}
-                  className="group relative flex flex-col justify-between rounded-3xl p-5 bg-white/90 backdrop-blur-xl border border-[rgba(20,20,40,0.08)] hover:border-transparent transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[0_20px_40px_-15px_rgba(99,91,255,0.18)]"
+                  className={`group relative flex flex-col justify-between rounded-3xl p-5 bg-white border border-[rgba(20,20,40,0.08)] transition-all duration-300 hover:-translate-y-2.5 ${st.hoverBorder} shadow-xs`}
                 >
-                  {/* Glowing background gradient border on hover */}
-                  <div
-                    className={`absolute -inset-[1.5px] rounded-3xl bg-gradient-to-b ${st.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-[0.5px]`}
-                  />
-
                   {/* Top glowing accent line */}
-                  <div className={`h-1.5 w-12 rounded-full bg-gradient-to-r ${st.gradient} mb-4 group-hover:w-full transition-all duration-500`} />
+                  <div className={`h-1.5 w-12 rounded-full bg-gradient-to-r ${st.gradient} mb-4 group-hover:w-full transition-all duration-400`} />
 
                   {/* Header: Stage Pill & Icon */}
                   <div className="flex items-center justify-between mb-3">
@@ -581,7 +586,7 @@ export default function LandingPage() {
 
                   {/* Titles */}
                   <div className="mb-2 text-left">
-                    <h3 className="text-lg font-bold text-[#17172A] tracking-tight group-hover:text-[#635BFF] transition-colors">
+                    <h3 className={`text-lg font-bold text-[#17172A] tracking-tight ${st.hoverTitle} transition-colors`}>
                       {st.title}
                     </h3>
                     <p className="text-[11px] font-medium text-[#68697A]">
