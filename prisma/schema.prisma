@@ -1,0 +1,104 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Project {
+  id            String               @id @default(cuid())
+  title         String
+  description   String?
+  assetType     String               @default("video") // video | audio | image | script
+  status        String               @default("draft") // idea | draft | analyzing | editing | ready | scheduled | published
+  duration      Int?                 // in seconds
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
+  assets        Asset[]
+  opportunities ContentOpportunity[]
+  clips         GeneratedClip[]
+}
+
+model Asset {
+  id              String   @id @default(cuid())
+  projectId       String?
+  project         Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  name            String
+  type            String   @default("video")
+  sizeBytes       Int      @default(0)
+  durationSeconds Int?
+  durationFormatted String?
+  thumbnailUrl    String?
+  fileUrl         String   @default("")
+  status          String   @default("analyzed")
+  topics          String   @default("[]") // JSON string of topics array
+  createdAt       DateTime @default(now())
+}
+
+model ContentOpportunity {
+  id                 String          @id @default(cuid())
+  projectId          String
+  project            Project         @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  title              String
+  hookText           String
+  startTime          Float
+  endTime            Float
+  startFormatted     String
+  endFormatted       String
+  duration           Float
+  score              Int             @default(85)
+  factorsJson        String          @default("{}") // JSON string of hookStrength, infoDensity etc.
+  whyItWorksJson     String          @default("[]") // JSON string of reasons
+  suggestedPlatforms String          @default("[]") // JSON string of platforms
+  isGenerated        Boolean         @default(false)
+  createdAt          DateTime        @default(now())
+  clips              GeneratedClip[]
+}
+
+model GeneratedClip {
+  id                  String              @id @default(cuid())
+  projectId           String
+  project             Project             @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  opportunityId       String?
+  opportunity         ContentOpportunity? @relation(fields: [opportunityId], references: [id], onDelete: SetNull)
+  title               String
+  hookText            String
+  duration            Float
+  durationFormatted   String
+  aspectRatio         String              @default("9:16")
+  platform            String              @default("tiktok")
+  score               Int                 @default(90)
+  thumbnailUrl        String
+  videoUrl            String
+  status              String              @default("ready")
+  captionStyleJson    String              @default("{}") // JSON string of caption style preset
+  createdAt           DateTime            @default(now())
+  calendarEvents      CalendarEvent[]
+}
+
+model CalendarEvent {
+  id            String         @id @default(cuid())
+  clipId        String?
+  clip          GeneratedClip? @relation(fields: [clipId], references: [id], onDelete: SetNull)
+  title         String
+  platform      String         // instagram | youtube_shorts | linkedin | youtube | tiktok | x
+  scheduledTime DateTime
+  status        String         @default("scheduled") // scheduled | published | failed
+  copyText      String?
+  hashtags      String         @default("[]") // JSON array of hashtags
+  createdAt     DateTime       @default(now())
+}
+
+model PlatformCopyRecord {
+  id              String   @id @default(cuid())
+  clipId          String
+  platform        String
+  title           String
+  body            String
+  hashtags        String   @default("[]")
+  characterCount  Int      @default(0)
+  estimatedReach  Int      @default(0)
+  createdAt       DateTime @default(now())
+}
