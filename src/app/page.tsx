@@ -23,6 +23,7 @@ import { motion } from 'framer-motion';
 import { ScoreRing } from '@/components/ScoreRing';
 import { AICoreVisual } from '@/components/AICoreVisual';
 import { FloatingBubbles } from '@/components/FloatingBubbles';
+import { NavBar } from '@/components/ui/tubelight-navbar';
 
 export default function LandingPage() {
   const steps = [
@@ -33,11 +34,21 @@ export default function LandingPage() {
     { num: '05', title: 'Publish', desc: 'Queue scheduled posts into an editorial calendar synced to your social channels.' },
   ];
 
+  const navItems = [
+    { name: 'How it works', url: '#how-it-works', icon: Layers },
+    { name: 'AI Engine', url: '#engine', icon: Cpu },
+    { name: 'Workflow', url: '#workflow', icon: Zap },
+    { name: 'Intelligence', url: '/analytics', icon: Sparkles },
+  ];
+
   return (
     <div className="min-h-screen bg-transparent text-[#17172A] selection:bg-[#635BFF]/15 selection:text-[#635BFF] relative">
       <FloatingBubbles />
+      {/* Floating Tubelight Navigation Bar */}
+      <NavBar items={navItems} />
+
       {/* Top Header */}
-      <header className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <header className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative z-40">
         <Link href="/" className="flex items-center gap-2.5">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#635BFF] via-[#8B5CF6] to-[#EC4899] flex items-center justify-center shadow-[0_2px_10px_rgba(99,91,255,0.3)]">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-white">
@@ -53,13 +64,8 @@ export default function LandingPage() {
           </div>
         </Link>
 
-        {/* Navigation links */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[#68697A]">
-          <a href="#how-it-works" className="hover:text-[#17172A] transition-colors">How it works</a>
-          <a href="#engine" className="hover:text-[#17172A] transition-colors">AI Content Engine</a>
-          <a href="#workflow" className="hover:text-[#17172A] transition-colors">Workflow</a>
-          <Link href="/analytics" className="hover:text-[#17172A] transition-colors">Intelligence</Link>
-        </nav>
+        {/* Desktop spacer to balance header */}
+        <div className="hidden md:block w-32" />
 
         {/* Actions */}
         <div className="flex items-center gap-3">

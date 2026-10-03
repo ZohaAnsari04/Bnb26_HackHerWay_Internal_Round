@@ -20,6 +20,15 @@
   --border-medium: rgba(20, 20, 40, 0.12);
   --border-focus: rgba(99, 91, 255, 0.35);
 
+  /* shadcn compatible variables */
+  --background: #FAFAF7;
+  --foreground: #17172A;
+  --primary: #635BFF;
+  --primary-foreground: #FFFFFF;
+  --muted: #F7F8FC;
+  --muted-foreground: #68697A;
+  --border: rgba(20, 20, 40, 0.08);
+
   /* Multi-tier diffused Apple/Linear-grade shadows */
   --shadow-card: 0 1px 2px rgba(20, 20, 40, 0.03), 0 4px 16px rgba(20, 20, 50, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.9);
   --shadow-hover: 0 4px 12px rgba(20, 20, 40, 0.04), 0 16px 36px rgba(20, 20, 50, 0.08), inset 0 1px 0 rgba(255, 255, 255, 1);
