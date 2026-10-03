@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { AppProvider } from "@/context/AppContext";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -19,7 +20,6 @@ export const metadata: Metadata = {
   description: "Turn one long-form video or audio asset into high-potential short clips, platform-tailored scripts, captions, and an intelligent scheduled publishing pipeline.",
   keywords: ["CreatorAI", "AI Video Repurposing", "Content Operating System", "Shorts Generator", "Reels", "TikTok", "AI Captions"],
   authors: [{ name: "CreatorAI Team" }],
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
 };
 
 export default function RootLayout({
@@ -33,7 +33,9 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body className="bg-[#FAFAF7] text-[#17172A] selection:bg-[#635BFF]/15 selection:text-[#635BFF] min-h-screen">
-        {children}
+        <AppProvider>
+          {children}
+        </AppProvider>
       </body>
     </html>
   );
