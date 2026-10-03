@@ -59,11 +59,11 @@ export default function SettingsPage() {
 
         <form onSubmit={handleSave} className="space-y-6">
           {/* Demo Mode / Fallback Card (Prompt Section 30) */}
-          <div className="card-clean p-6 space-y-3 bg-gradient-to-r from-white to-[#FAFAF7]">
+          <div className="card-clean card-premium surface-radial-purple card-top-edge p-6 space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-xl bg-[#635BFF]/10 text-[#635BFF] flex items-center justify-center">
-                  <ShieldCheck className="w-4 h-4" />
+                <div className="icon-box-purple">
+                  <ShieldCheck className="w-5 h-5 text-[#635BFF]" />
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-[#17172A]">Hackathon Demo Mode</h3>
@@ -90,9 +90,11 @@ export default function SettingsPage() {
           </div>
 
           {/* AI Provider & Models */}
-          <div className="card-clean p-6 space-y-4">
+          <div className="card-clean card-premium p-6 space-y-4">
             <div className="flex items-center gap-2 pb-2 border-b border-[rgba(20,20,40,0.06)]">
-              <Cpu className="w-4 h-4 text-[#635BFF]" />
+              <div className="icon-box-purple !w-8 !h-8 !rounded-xl">
+                <Cpu className="w-4 h-4 text-[#635BFF]" />
+              </div>
               <h3 className="text-sm font-bold text-[#17172A]">AI Engine & Model Selection</h3>
             </div>
 
@@ -150,9 +152,11 @@ export default function SettingsPage() {
           </div>
 
           {/* Connected Social Platforms */}
-          <div className="card-clean p-6 space-y-4">
+          <div className="card-clean card-premium p-6 space-y-4">
             <div className="flex items-center gap-2 pb-2 border-b border-[rgba(20,20,40,0.06)]">
-              <Share2 className="w-4 h-4 text-[#EC4899]" />
+              <div className="icon-box-pink !w-8 !h-8 !rounded-xl">
+                <Share2 className="w-4 h-4 text-[#EC4899]" />
+              </div>
               <h3 className="text-sm font-bold text-[#17172A]">Connected Publishing Channels</h3>
             </div>
 
@@ -168,7 +172,7 @@ export default function SettingsPage() {
                 return (
                   <div
                     key={plat.id}
-                    className="p-3.5 rounded-xl bg-[#FAFAF7] border border-[rgba(20,20,40,0.06)] flex items-center justify-between"
+                    className="p-3.5 rounded-2xl bg-white/80 border border-[rgba(20,20,40,0.06)] shadow-2xs hover:border-[#635BFF]/30 hover:bg-[#F9FAFE] transition-all flex items-center justify-between"
                   >
                     <div>
                       <h4 className="text-xs font-bold text-[#17172A]">{plat.label}</h4>
@@ -178,7 +182,7 @@ export default function SettingsPage() {
                     <button
                       type="button"
                       onClick={() => togglePlatform(plat.id as any)}
-                      className={`px-3 py-1 text-xs font-semibold rounded-lg border transition-all ${
+                      className={`px-3 py-1 text-xs font-semibold rounded-xl border transition-all ${
                         isConnected
                           ? 'border-[#22C55E]/30 bg-[#22C55E]/10 text-[#22C55E]'
                           : 'border-[rgba(20,20,40,0.1)] text-[#68697A] hover:bg-white'

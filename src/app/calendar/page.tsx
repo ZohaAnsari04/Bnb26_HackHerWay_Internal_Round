@@ -91,10 +91,10 @@ export default function CalendarPage() {
         </div>
 
         {/* Month Navigation Bar */}
-        <div className="flex items-center justify-between p-4 bg-white rounded-2xl border border-[rgba(20,20,40,0.06)] shadow-xs">
+        <div className="card-clean card-premium p-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <span className="text-base font-bold text-[#17172A]">{currentMonth}</span>
-            <span className="text-xs text-[#68697A] font-medium">
+            <span className="badge-soft-purple text-xs font-semibold px-2.5 py-0.5 rounded-full">
               {calendarEvents.length} posts scheduled
             </span>
           </div>
@@ -102,13 +102,13 @@ export default function CalendarPage() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => showToast('Previous month')}
-              className="p-1.5 rounded-lg border border-[rgba(20,20,40,0.08)] text-[#68697A] hover:text-[#17172A]"
+              className="p-1.5 rounded-xl border border-[rgba(20,20,40,0.08)] text-[#68697A] hover:text-[#17172A] hover:bg-[#F7F8FC] transition-colors"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
             <button
               onClick={() => showToast('Next month')}
-              className="p-1.5 rounded-lg border border-[rgba(20,20,40,0.08)] text-[#68697A] hover:text-[#17172A]"
+              className="p-1.5 rounded-xl border border-[rgba(20,20,40,0.08)] text-[#68697A] hover:text-[#17172A] hover:bg-[#F7F8FC] transition-colors"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -125,13 +125,13 @@ export default function CalendarPage() {
                 <div
                   key={evt.id}
                   onClick={() => setSelectedEvent(evt)}
-                  className="card-clean p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer hover:border-[#635BFF]/30 transition-all"
+                  className="card-clean card-premium card-sweep p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer hover:border-[rgba(99,91,255,0.25)] transition-all"
                 >
                   <div className="flex items-center gap-3.5">
                     <img
                       src={evt.thumbnailUrl}
                       alt={evt.title}
-                      className="w-14 h-14 rounded-xl object-cover shrink-0"
+                      className="w-14 h-14 rounded-xl object-cover shrink-0 shadow-2xs"
                     />
                     <div>
                       <div className="flex items-center gap-2">
@@ -158,7 +158,7 @@ export default function CalendarPage() {
                         e.stopPropagation();
                         showToast(`Publishing immediately to ${platform.label}...`);
                       }}
-                      className="px-3 py-1.5 rounded-lg border border-[rgba(20,20,40,0.1)] text-xs font-semibold text-[#17172A] hover:bg-[#FAFAF7]"
+                      className="px-3.5 py-1.5 rounded-xl border border-[rgba(20,20,40,0.1)] text-xs font-semibold text-[#17172A] hover:bg-[#F3F4FB] hover:border-[#635BFF]/30 transition-all"
                     >
                       Publish Now
                     </button>
@@ -169,7 +169,7 @@ export default function CalendarPage() {
           </div>
         ) : (
           /* Month / Week Grid View */
-          <div className="card-clean p-4 overflow-hidden">
+          <div className="card-clean card-premium p-5 overflow-hidden">
             {/* Days of Week Header */}
             <div className="grid grid-cols-7 gap-2 pb-3 border-b border-[rgba(20,20,40,0.06)] text-center text-xs font-bold text-[#68697A]">
               <span>SUN</span>
@@ -182,7 +182,7 @@ export default function CalendarPage() {
             </div>
 
             {/* Days Grid */}
-            <div className="grid grid-cols-7 gap-2 pt-2">
+            <div className="grid grid-cols-7 gap-2 pt-3">
               {Array.from({ length: 31 }, (_, i) => {
                 const dayNum = i + 1;
                 const dateStr = `2026-03-${dayNum.toString().padStart(2, '0')}`;
@@ -191,10 +191,14 @@ export default function CalendarPage() {
                 return (
                   <div
                     key={dayNum}
-                    className="min-h-[96px] p-2 rounded-xl bg-[#FAFAF7] border border-[rgba(20,20,40,0.05)] hover:border-[#635BFF]/30 transition-all flex flex-col justify-between"
+                    className={`min-h-[100px] p-2.5 rounded-2xl border transition-all flex flex-col justify-between ${
+                      dayNum === 28
+                        ? 'bg-[#F3F0FF]/40 border-[#635BFF]/30 shadow-2xs'
+                        : 'bg-white/60 border-[rgba(20,20,40,0.06)] hover:bg-[#F9FAFE] hover:border-[#635BFF]/25'
+                    }`}
                   >
                     <div className="flex items-center justify-between text-xs font-semibold text-[#68697A]">
-                      <span className={dayNum === 28 ? 'w-5 h-5 rounded-full bg-[#635BFF] text-white flex items-center justify-center text-[10px]' : ''}>
+                      <span className={dayNum === 28 ? 'w-5 h-5 rounded-full bg-[#635BFF] text-white flex items-center justify-center text-[10px] font-bold shadow-xs' : ''}>
                         {dayNum}
                       </span>
                     </div>
@@ -206,7 +210,7 @@ export default function CalendarPage() {
                           <div
                             key={evt.id}
                             onClick={() => setSelectedEvent(evt)}
-                            className="p-1 rounded-md bg-white border border-[rgba(20,20,40,0.08)] shadow-2xs cursor-pointer hover:border-[#635BFF] transition-all"
+                            className="p-1.5 rounded-xl bg-white border border-[rgba(20,20,40,0.08)] shadow-2xs cursor-pointer hover:border-[#635BFF] hover:shadow-xs transition-all"
                             title={evt.title}
                           >
                             <span className={`text-[9px] font-bold block truncate ${platform.text}`}>
@@ -225,16 +229,17 @@ export default function CalendarPage() {
 
         {/* Selected Event Detail Modal / Drawer */}
         {selectedEvent && (
-          <div className="card-clean p-5 flex flex-col sm:flex-row items-center justify-between gap-4 bg-gradient-to-r from-white to-[#FAFAF7]">
+          <div className="card-clean card-premium surface-radial-purple card-top-edge p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <img
                 src={selectedEvent.thumbnailUrl}
                 alt={selectedEvent.title}
-                className="w-16 h-16 rounded-xl object-cover"
+                className="w-16 h-16 rounded-xl object-cover shadow-xs"
               />
               <div>
-                <span className="text-xs font-bold text-[#635BFF] uppercase tracking-wider">
-                  Post Scheduled for {selectedEvent.scheduledDate} at {selectedEvent.scheduledTime}
+                <span className="text-xs font-bold text-[#635BFF] uppercase tracking-wider flex items-center gap-1.5">
+                  <Clock className="w-3.5 h-3.5 text-[#635BFF]" />
+                  <span>Scheduled for {selectedEvent.scheduledDate} at {selectedEvent.scheduledTime}</span>
                 </span>
                 <h4 className="text-sm font-bold text-[#17172A] mt-0.5">{selectedEvent.title}</h4>
                 <p className="text-xs text-[#68697A] mt-1 max-w-xl">{selectedEvent.captionExcerpt}</p>
@@ -244,7 +249,7 @@ export default function CalendarPage() {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setSelectedEvent(null)}
-                className="px-3 py-1.5 rounded-lg text-xs font-medium text-[#68697A] hover:bg-black/5"
+                className="px-3 py-1.5 rounded-xl text-xs font-medium text-[#68697A] hover:bg-black/5 transition-colors"
               >
                 Dismiss
               </button>

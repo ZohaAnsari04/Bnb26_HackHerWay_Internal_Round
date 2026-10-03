@@ -92,8 +92,10 @@ export default function ClipsPage() {
 
         {/* Clips Grid (Section 15) */}
         {filteredClips.length === 0 ? (
-          <div className="card-clean p-12 text-center">
-            <Scissors className="w-10 h-10 text-[#68697A] mx-auto mb-3" />
+          <div className="card-clean card-premium surface-radial-purple card-top-edge p-12 text-center">
+            <div className="icon-box-purple mx-auto mb-3 flex items-center justify-center">
+              <Scissors className="w-6 h-6 text-[#635BFF]" />
+            </div>
             <h3 className="text-base font-bold text-[#17172A]">No clips in this view</h3>
             <p className="text-xs text-[#68697A] mt-1">Upload a video in studio and let CreatorAI find your best moments.</p>
             <Link
@@ -110,8 +112,11 @@ export default function ClipsPage() {
                 key={clip.id}
                 whileHover={{ y: -3 }}
                 transition={{ duration: 0.2 }}
-                className="card-clean overflow-hidden flex flex-col justify-between group"
+                className="card-clean card-premium card-sweep overflow-hidden flex flex-col justify-between group hover:border-[rgba(99,91,255,0.24)]"
               >
+                {/* Thin top gradient detail */}
+                <div className="card-top-edge" />
+
                 {/* Visual Thumbnail Frame */}
                 <div
                   className={`relative bg-[#17172A] overflow-hidden ${
@@ -127,33 +132,33 @@ export default function ClipsPage() {
                     alt={clip.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/40 pointer-events-none" />
 
                   {/* Top Bar inside thumbnail */}
-                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between">
-                    <span className="px-2 py-0.5 rounded-full bg-white/90 backdrop-blur-md text-[10px] font-bold text-[#17172A] shadow-xs">
+                  <div className="absolute top-3 left-3 right-3 flex items-center justify-between z-10">
+                    <span className="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md text-[10px] font-bold text-[#17172A] shadow-xs border border-white/20">
                       {clip.aspectRatio}
                     </span>
-                    <ScoreRing score={clip.score} size={38} strokeWidth={4} />
+                    <ScoreRing score={clip.score} size={42} strokeWidth={4.5} />
                   </div>
 
                   {/* Center Play Button Overlay */}
                   <Link
                     href={`/editor/${clip.id}`}
                     onClick={() => setActiveClip(clip)}
-                    className="absolute inset-0 flex items-center justify-center"
+                    className="absolute inset-0 flex items-center justify-center z-10"
                   >
-                    <div className="w-12 h-12 rounded-full bg-white/90 backdrop-blur-md text-[#17172A] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                      <Play className="w-5 h-5 fill-[#17172A] ml-0.5" />
+                    <div className="w-13 h-13 rounded-full bg-white/95 backdrop-blur-md text-[#17172A] flex items-center justify-center shadow-[0_6px_25px_rgba(0,0,0,0.35)] group-hover:scale-110 group-hover:bg-[#635BFF] group-hover:text-white transition-all">
+                      <Play className="w-5 h-5 fill-current ml-0.5" />
                     </div>
                   </Link>
 
                   {/* Bottom info on thumbnail */}
-                  <div className="absolute bottom-3 left-3 right-3">
-                    <span className="text-[11px] font-bold text-white bg-black/60 backdrop-blur-md px-2 py-0.5 rounded">
+                  <div className="absolute bottom-3 left-3 right-3 z-10">
+                    <span className="text-[10px] font-bold text-white bg-black/75 backdrop-blur-md px-2 py-0.5 rounded border border-white/10">
                       {clip.durationFormatted}
                     </span>
-                    <p className="text-white text-xs font-bold line-clamp-1 mt-1 drop-shadow">
+                    <p className="text-white text-xs font-bold line-clamp-1 mt-1.5 drop-shadow">
                       &ldquo;{clip.hookText}&rdquo;
                     </p>
                   </div>
@@ -166,17 +171,17 @@ export default function ClipsPage() {
                       <span className="font-semibold text-[#635BFF]">
                         {getPlatformLabel(clip.platform)}
                       </span>
-                      <span className="text-[#22C55E] font-medium flex items-center gap-1">
-                        <CheckCircle2 className="w-3 h-3" /> Ready
+                      <span className="badge-soft-green text-[10px] font-semibold flex items-center gap-1 px-2 py-0.5 rounded-full">
+                        <CheckCircle2 className="w-3 h-3 text-[#22C55E]" /> Ready
                       </span>
                     </div>
 
-                    <h3 className="text-sm font-bold text-[#17172A] line-clamp-1">
+                    <h3 className="text-sm font-bold text-[#17172A] line-clamp-1 mt-1">
                       {clip.title}
                     </h3>
 
                     <p className="text-xs text-[#68697A] mt-1 line-clamp-2">
-                      Captions: {clip.captionStyle.id} • Framed for {clip.platform}
+                      Captions: <span className="font-medium text-[#17172A]">{clip.captionStyle.id}</span> • Optimized for {clip.platform}
                     </p>
                   </div>
 
@@ -184,7 +189,7 @@ export default function ClipsPage() {
                   <div className="mt-4 pt-3 border-t border-[rgba(20,20,40,0.06)] flex items-center justify-between gap-2">
                     <button
                       onClick={() => openScheduleModal(clip)}
-                      className="px-3 py-1.5 rounded-lg border border-[rgba(20,20,40,0.1)] text-xs font-semibold text-[#17172A] hover:bg-[#FAFAF7] flex items-center gap-1.5 transition-colors"
+                      className="px-3.5 py-1.5 rounded-xl border border-[rgba(20,20,40,0.1)] text-xs font-semibold text-[#17172A] hover:bg-[#F3F4FB] hover:border-[#635BFF]/30 flex items-center gap-1.5 transition-all"
                     >
                       <Calendar className="w-3.5 h-3.5 text-[#68697A]" />
                       <span>Schedule</span>
@@ -193,7 +198,7 @@ export default function ClipsPage() {
                     <Link
                       href={`/editor/${clip.id}`}
                       onClick={() => setActiveClip(clip)}
-                      className="px-3 py-1.5 rounded-lg text-xs font-semibold btn-primary-gradient flex items-center gap-1.5 shadow-2xs"
+                      className="px-3.5 py-1.5 rounded-xl text-xs font-semibold btn-primary-gradient flex items-center gap-1.5 shadow-2xs"
                     >
                       <Sliders className="w-3.5 h-3.5" />
                       <span>Open Editor</span>

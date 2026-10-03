@@ -35,17 +35,20 @@ export function ScoreModal() {
 
         {/* Modal Window */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95, y: 10 }}
+          initial={{ opacity: 0, scale: 0.96, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.95, y: 10 }}
+          exit={{ opacity: 0, scale: 0.96, y: 12 }}
           transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-xl bg-white rounded-2xl shadow-[0_20px_60px_rgba(20,20,50,0.18)] border border-[rgba(20,20,40,0.08)] overflow-hidden z-10"
+          className="relative w-full max-w-xl bg-white rounded-3xl shadow-[0_25px_70px_rgba(20,20,50,0.22)] border border-[rgba(20,20,40,0.08)] overflow-hidden z-10"
         >
+          {/* Top gradient edge */}
+          <div className="card-top-edge" />
+
           {/* Header */}
           <div className="px-6 py-5 border-b border-[rgba(20,20,40,0.06)] flex items-center justify-between bg-gradient-to-r from-[#FAFAF7] to-white">
-            <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-[#635BFF]/10 text-[#635BFF] flex items-center justify-center">
-                <Sparkles className="w-4 h-4" />
+            <div className="flex items-center gap-3">
+              <div className="icon-box-purple">
+                <Sparkles className="w-5 h-5 text-[#635BFF]" />
               </div>
               <div>
                 <h3 className="text-base font-semibold text-[#17172A] tracking-tight">How CreatorAI Calculated This</h3>
@@ -54,7 +57,7 @@ export function ScoreModal() {
             </div>
             <button
               onClick={closeScoreModal}
-              className="p-1.5 rounded-lg text-[#68697A] hover:text-[#17172A] hover:bg-black/5 transition-colors"
+              className="p-1.5 rounded-xl text-[#68697A] hover:text-[#17172A] hover:bg-black/5 transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
@@ -62,18 +65,18 @@ export function ScoreModal() {
 
           <div className="p-6 space-y-6 max-h-[80vh] overflow-y-auto">
             {/* Top Score Summary Banner */}
-            <div className="flex items-center gap-5 p-4 rounded-xl bg-[#F7F8FC] border border-[rgba(20,20,40,0.06)]">
-              <ScoreRing score={score} size={64} strokeWidth={5} showLabel={true} />
+            <div className="card-clean card-premium surface-radial-purple card-top-edge p-5 flex items-center gap-5">
+              <ScoreRing score={score} size={68} strokeWidth={5} showLabel={true} />
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-[#635BFF]">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#635BFF]">
                     AI Opportunity Score
                   </span>
-                  <span className="text-[11px] px-2 py-0.5 rounded-full bg-[#22C55E]/10 text-[#22C55E] font-medium">
+                  <span className="badge-soft-green text-[11px] px-2.5 py-0.5 rounded-full font-bold">
                     Top 5% Tier
                   </span>
                 </div>
-                <h4 className="text-sm font-semibold text-[#17172A] truncate mt-0.5">
+                <h4 className="text-sm font-bold text-[#17172A] truncate mt-1">
                   &ldquo;{hookText || title}&rdquo;
                 </h4>
                 <p className="text-xs text-[#68697A] mt-0.5">
@@ -96,9 +99,9 @@ export function ScoreModal() {
 
               <div className="space-y-3.5">
                 {factorList.map((factor) => (
-                  <div key={factor.label} className="p-3 rounded-lg border border-[rgba(20,20,40,0.05)] hover:border-[#635BFF]/20 bg-white transition-colors">
+                  <div key={factor.label} className="p-3.5 rounded-2xl border border-[rgba(20,20,40,0.06)] hover:border-[#635BFF]/30 bg-white/90 shadow-2xs transition-all">
                     <div className="flex items-center justify-between text-sm mb-1.5">
-                      <span className="font-medium text-[#17172A]">{factor.label}</span>
+                      <span className="font-semibold text-[#17172A]">{factor.label}</span>
                       <span className="font-bold text-[#635BFF]">{factor.value}%</span>
                     </div>
                     {/* Progress bar */}
@@ -107,7 +110,7 @@ export function ScoreModal() {
                         initial={{ width: 0 }}
                         animate={{ width: `${factor.value}%` }}
                         transition={{ duration: 0.8, ease: 'easeOut' }}
-                        className="h-full bg-gradient-to-r from-[#635BFF] to-[#8B5CF6] rounded-full"
+                        className="h-full bg-gradient-to-r from-[#635BFF] via-[#8B5CF6] to-[#EC4899] rounded-full"
                       />
                     </div>
                     <p className="text-[11px] text-[#68697A] mt-1.5 leading-relaxed">
@@ -120,7 +123,7 @@ export function ScoreModal() {
 
             {/* Why This Works Section */}
             {whyItWorks && whyItWorks.length > 0 && (
-              <div className="p-4 rounded-xl bg-[#FAFAF7] border border-[rgba(20,20,40,0.07)]">
+              <div className="p-4 rounded-2xl bg-[#FAFAF8] border border-[rgba(20,20,40,0.07)]">
                 <h4 className="text-xs font-bold uppercase tracking-wider text-[#17172A] mb-2.5 flex items-center gap-1.5">
                   <span className="text-[#22C55E]">✓</span> Why this works
                 </h4>
@@ -144,7 +147,7 @@ export function ScoreModal() {
             <div className="flex items-center gap-2.5">
               <button
                 onClick={closeScoreModal}
-                className="px-4 py-2 rounded-xl text-xs font-medium text-[#68697A] hover:text-[#17172A] hover:bg-black/5 transition-colors"
+                className="px-4 py-2 rounded-xl text-xs font-semibold text-[#68697A] hover:text-[#17172A] hover:bg-black/5 transition-colors"
               >
                 Close
               </button>
@@ -153,7 +156,7 @@ export function ScoreModal() {
                   closeScoreModal();
                   openClipModal(scoreModalOpportunity);
                 }}
-                className="px-4 py-2 rounded-xl text-xs font-medium btn-primary-gradient"
+                className="px-5 py-2.5 rounded-xl text-xs font-semibold btn-primary-gradient shadow-xs"
               >
                 Generate Clip Now
               </button>

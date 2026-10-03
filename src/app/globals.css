@@ -2,9 +2,9 @@
 
 :root {
   /* CreatorAI Strict Light Color Palette */
-  --bg-main: #FAFAF7;
+  --bg-main: #FAFAF8;
   --bg-subtle: #F7F8FC;
-  --bg-card: #FFFFFF;
+  --bg-card: rgba(255, 255, 255, 0.94);
   --text-primary: #17172A;
   --text-secondary: #68697A;
   --text-muted: #9496A8;
@@ -16,18 +16,29 @@
   --accent-success: #22C55E;
   --accent-warning: #F59E0B;
   
-  --border-subtle: rgba(20, 20, 40, 0.07);
-  --border-medium: rgba(20, 20, 40, 0.12);
-  --border-focus: rgba(99, 91, 255, 0.35);
+  /* Refined Border Tokens */
+  --border-subtle: rgba(99, 91, 255, 0.08);
+  --border-card: rgba(20, 20, 50, 0.07);
+  --border-medium: rgba(20, 20, 50, 0.11);
+  --border-focus: rgba(139, 92, 246, 0.4);
 
-  --shadow-card: 0 4px 20px rgba(23, 23, 42, 0.04), 0 1px 3px rgba(23, 23, 42, 0.02);
-  --shadow-hover: 0 12px 32px rgba(23, 23, 42, 0.08), 0 2px 6px rgba(23, 23, 42, 0.03);
+  /* Radius Tokens */
+  --radius-card: 22px;
+  --radius-panel: 20px;
+  --radius-button: 12px;
+  --radius-pill: 9999px;
+
+  /* Layered Depth Shadows (Apple / Linear / Stripe grade) */
+  --shadow-card: 0 8px 30px rgba(45, 35, 100, 0.05), 0 2px 8px rgba(20, 20, 40, 0.03), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  --shadow-hover: 0 14px 40px rgba(50, 40, 120, 0.09), 0 3px 10px rgba(20, 20, 40, 0.04), inset 0 1px 0 rgba(255, 255, 255, 1);
   --shadow-float: 0 20px 48px rgba(30, 30, 70, 0.12), 0 4px 12px rgba(30, 30, 70, 0.06);
-  --shadow-glow: 0 0 24px rgba(99, 91, 255, 0.2);
+  --shadow-glow-ai: 0 0 28px rgba(99, 91, 255, 0.12);
+  --shadow-glow-creative: 0 0 28px rgba(236, 72, 153, 0.11);
 
-  --gradient-primary: linear-gradient(135deg, #635BFF 0%, #8B5CF6 50%, #EC4899 100%);
+  /* Signature Gradients */
+  --gradient-primary: linear-gradient(135deg, #635BFF 0%, #8B5CF6 55%, #EC4899 100%);
   --gradient-ai: linear-gradient(135deg, #06B6D4 0%, #635BFF 100%);
-  --gradient-soft: linear-gradient(180deg, rgba(247, 248, 252, 0.7) 0%, rgba(250, 250, 247, 0.9) 100%);
+  --gradient-card-edge: linear-gradient(90deg, #635BFF 0%, #8B5CF6 50%, #EC4899 100%);
 
   /* Typography Families */
   --font-serif-heading: Georgia, 'Times New Roman', Times, serif;
@@ -53,7 +64,7 @@ h1, h2, h3, h4, h5, h6, .font-heading, .heading-georgia {
   letter-spacing: -0.015em;
 }
 
-/* General text elements fallback to Montserrat */
+/* General text elements default to Montserrat */
 p, span, div, a, button, input, textarea, select, label, table, nav {
   font-family: inherit;
 }
@@ -74,73 +85,298 @@ p, span, div, a, button, input, textarea, select, label, table, nav {
   background: rgba(23, 23, 42, 0.25);
 }
 
-/* Modern Card Classes */
-.card-clean {
-  background: #FFFFFF;
+/* =========================================================================
+   GLOBAL SURFACE SYSTEM (Premium AI Creative SaaS)
+   ========================================================================= */
+
+/* 1. Base Premium Card: Layered Depth, Sub-pixel Inner Bevel */
+.card-clean,
+.card-premium {
+  position: relative;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-subtle);
-  border-radius: 18px;
+  border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.card-clean:hover {
+.card-clean:hover,
+.card-premium:hover {
+  transform: translateY(-3px);
   box-shadow: var(--shadow-hover);
-  border-color: rgba(99, 91, 255, 0.18);
+  border-color: rgba(99, 91, 255, 0.22);
 }
 
-.card-flat {
+/* 2. Top Edge Detail (2px subtle gradient line on important cards) */
+.card-top-edge {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-top-edge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient-card-edge);
+  opacity: 0.65;
+  border-top-left-radius: var(--radius-card);
+  border-top-right-radius: var(--radius-card);
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+.card-top-edge:hover::before {
+  opacity: 1;
+}
+
+/* 3. Light Sweep Effect for selected interactive surfaces */
+.card-sweep {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-sweep::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0.4) 30%,
+    rgba(255, 255, 255, 0.6) 35%,
+    rgba(255, 255, 255, 0.4) 40%,
+    transparent 50%
+  );
+  transform: translateX(-100%) rotate(25deg);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.65s ease-out, opacity 0.4s ease-out;
+}
+
+.card-sweep:hover::after {
+  opacity: 1;
+  transform: translateX(100%) rotate(25deg);
+}
+
+/* 4. Subtle Internal Radial Gradients */
+.surface-radial-violet {
+  background: radial-gradient(circle at top right, rgba(139, 92, 246, 0.06), transparent 50%), #FFFFFF;
+}
+
+.surface-radial-pink {
+  background: radial-gradient(circle at top right, rgba(236, 72, 153, 0.05), transparent 50%), #FFFFFF;
+}
+
+.surface-radial-cyan {
+  background: radial-gradient(circle at top right, rgba(6, 182, 212, 0.05), transparent 50%), #FFFFFF;
+}
+
+.surface-radial-green {
+  background: radial-gradient(circle at top right, rgba(34, 197, 94, 0.05), transparent 50%), #FFFFFF;
+}
+
+/* 5. Accent Glows */
+.card-glow-ai {
+  box-shadow: 0 8px 30px rgba(45, 35, 100, 0.05), 0 0 28px rgba(99, 91, 255, 0.08);
+}
+
+.card-glow-creative {
+  box-shadow: 0 8px 30px rgba(45, 35, 100, 0.05), 0 0 28px rgba(236, 72, 153, 0.07);
+}
+
+/* 6. Upgraded Icon Containers (40-48px, rounded 14-16px, soft gradients, hover micro-movement) */
+.icon-box-purple {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(99, 91, 255, 0.14) 0%, rgba(139, 92, 246, 0.06) 100%);
+  border: 1px solid rgba(99, 91, 255, 0.16);
+  color: #635BFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(99, 91, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.icon-box-pink {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.14) 0%, rgba(244, 114, 182, 0.06) 100%);
+  border: 1px solid rgba(236, 72, 153, 0.16);
+  color: #EC4899;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(236, 72, 153, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.icon-box-cyan {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.14) 0%, rgba(56, 189, 248, 0.06) 100%);
+  border: 1px solid rgba(6, 182, 212, 0.16);
+  color: #06B6D4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(6, 182, 212, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.icon-box-green {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(34, 197, 94, 0.14) 0%, rgba(74, 222, 128, 0.06) 100%);
+  border: 1px solid rgba(34, 197, 94, 0.16);
+  color: #22C55E;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(34, 197, 94, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.icon-box-amber {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.14) 0%, rgba(251, 191, 36, 0.06) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.16);
+  color: #F59E0B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(245, 158, 11, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Hover micro-rotate on icon containers */
+.group:hover .icon-box-purple,
+.group:hover .icon-box-pink,
+.group:hover .icon-box-cyan,
+.group:hover .icon-box-green,
+.group:hover .icon-box-amber {
+  transform: translateY(-1.5px) rotate(1.5deg);
+}
+
+/* 7. Upgraded Inputs & Textareas */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="date"],
+input[type="time"],
+textarea,
+select {
   background: #FFFFFF;
-  border: 1px solid var(--border-subtle);
-  border-radius: 16px;
+  border: 1px solid rgba(30, 30, 60, 0.10);
+  border-radius: 13px;
+  box-shadow: 0 1px 2px rgba(20, 20, 40, 0.02);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Gradient text */
-.text-gradient-primary {
-  background: var(--gradient-primary);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: #8B5CF6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.12);
 }
 
-.text-gradient-ai {
-  background: var(--gradient-ai);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Primary Button Styling */
+/* 8. Upgraded Buttons */
 .btn-primary-gradient {
   background: var(--gradient-primary);
   color: #FFFFFF;
-  font-weight: 500;
-  border-radius: 12px;
-  box-shadow: 0 4px 14px rgba(99, 91, 255, 0.3);
-  transition: all 0.2s ease;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-button);
+  box-shadow: 0 6px 18px rgba(99, 91, 255, 0.20), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .btn-primary-gradient:hover {
-  box-shadow: 0 6px 20px rgba(99, 91, 255, 0.45);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(99, 91, 255, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.45);
 }
 
 .btn-primary-gradient:active {
   transform: translateY(0);
 }
 
-/* Subtle glow badge */
-.badge-ai {
-  background: rgba(99, 91, 255, 0.08);
+.btn-secondary {
+  background: #FFFFFF;
+  border: 1px solid rgba(20, 20, 50, 0.10);
+  border-radius: var(--radius-button);
+  box-shadow: 0 1px 3px rgba(20, 20, 40, 0.03);
+  color: var(--text-primary);
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: #F8F7FF;
+  border-color: rgba(99, 91, 255, 0.25);
   color: #635BFF;
+  transform: translateY(-1px);
+}
+
+/* 9. Upgraded Badges */
+.badge-soft-purple {
+  background: rgba(99, 91, 255, 0.08);
   border: 1px solid rgba(99, 91, 255, 0.16);
+  color: #635BFF;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+}
+
+.badge-soft-pink {
+  background: rgba(236, 72, 153, 0.08);
+  border: 1px solid rgba(236, 72, 153, 0.16);
+  color: #EC4899;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+}
+
+.badge-soft-green {
+  background: rgba(34, 197, 94, 0.08);
+  border: 1px solid rgba(34, 197, 94, 0.16);
+  color: #22C55E;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+}
+
+.badge-soft-cyan {
+  background: rgba(6, 182, 212, 0.08);
+  border: 1px solid rgba(6, 182, 212, 0.16);
+  color: #06B6D4;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
 }
 
 /* Pulse animation for AI Core */
 @keyframes orb-pulse {
   0%, 100% {
     transform: scale(1);
-    opacity: 0.85;
+    opacity: 0.88;
   }
   50% {
-    transform: scale(1.08);
+    transform: scale(1.07);
     opacity: 1;
   }
 }
@@ -150,7 +386,7 @@ p, span, div, a, button, input, textarea, select, label, table, nav {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-8px) rotate(2deg);
+    transform: translateY(-6px) rotate(1.5deg);
   }
 }
 
