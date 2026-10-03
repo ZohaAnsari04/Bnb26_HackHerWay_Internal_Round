@@ -338,7 +338,7 @@ export default function LandingPage() {
             Explore Demo
           </Link>
           <Link
-            href="/studio"
+            href="/dashboard"
             className="px-4 py-2 text-xs font-semibold btn-primary-gradient flex items-center gap-1.5"
           >
             <span>Launch Studio</span>
@@ -398,7 +398,7 @@ export default function LandingPage() {
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              href="/studio"
+              href="/dashboard"
               className="px-6 py-3.5 rounded-xl bg-white border border-[rgba(20,20,40,0.1)] text-sm font-semibold text-[#17172A] hover:bg-[#FAFAF7] transition-all shadow-xs"
             >
               Explore Demo Project
@@ -955,16 +955,16 @@ export default function LandingPage() {
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Link
               href="/dashboard"
-              className="px-6 py-3.5 rounded-xl btn-primary-gradient text-sm font-semibold flex items-center gap-2 shadow-lg"
+              className="px-6 py-3.5 rounded-xl btn-primary-gradient text-sm font-semibold flex items-center gap-2 shadow-lg hover:shadow-xl transition-all"
             >
               <span>Open Creator Dashboard</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
-              href="/studio"
-              className="px-6 py-3.5 rounded-xl bg-white border border-[rgba(20,20,40,0.1)] text-sm font-semibold text-[#17172A] hover:bg-[#FAFAF7]"
+              href="/dashboard"
+              className="px-6 py-3.5 rounded-xl bg-white border border-[rgba(20,20,40,0.1)] text-sm font-semibold text-[#17172A] hover:bg-[#FAFAF7] transition-all"
             >
-              Explore AI Studio
+              <span>Launch Studio</span>
             </Link>
           </div>
         </div>
