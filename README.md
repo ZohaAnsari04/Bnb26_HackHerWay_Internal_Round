@@ -6,14 +6,14 @@
 
 ### Turn one long-form video or audio asset into an omnichannel content syndication machine.
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-creator--ai--phi.vercel.app-635BFF?style=for-the-badge&logo=vercel)](https://creator-ai-phi.vercel.app/)
 [![Next.js](https://img.shields.io/badge/Next.js-16.3.8-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19.2.8-61DAFB?style=for-the-badge&logo=react)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
-[![SQLite](https://img.shields.io/badge/SQLite-Native_Node_22-003B57?style=for-the-badge&logo=sqlite)](https://www.sqlite.org/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](LICENSE)
 
-[**Live Demo**](http://localhost:3000) • [**Architecture**](#-system-architecture) • [**Core Features**](#-key-modules--features) • [**Getting Started**](#-getting-started) • [**Judge Walkthrough**](#-hackathon-walkthrough-60s)
+[**🌐 Open Live Demo**](https://creator-ai-phi.vercel.app/) • [**Architecture**](#-system-architecture) • [**Core Features**](#-key-modules--features) • [**Getting Started**](#-getting-started) • [**Judge Walkthrough**](#-hackathon-walkthrough-60s)
 
 </div>
 
@@ -214,13 +214,21 @@ Bnb26_HackHerWay_Internal_Round/
 
 ---
 
-## 🛠️ Getting Started
+## 🛠️ Getting Started & Deployment
 
-### Prerequisites
+### 🌐 Live Deployment
+The project is deployed and live on Vercel:
+👉 **[https://creator-ai-phi.vercel.app/](https://creator-ai-phi.vercel.app/)**
+
+---
+
+### Local Development Setup
+
+#### Prerequisites
 - **Node.js**: `v20.x` or `v22.x+` (Recommended)
 - **npm** or **pnpm** / **yarn**
 
-### Installation
+#### Installation
 
 1. **Clone the repository**:
    ```bash
@@ -238,8 +246,8 @@ Bnb26_HackHerWay_Internal_Round/
    npm run dev
    ```
 
-4. **Launch the application**:
-   Open **[http://localhost:3000](http://localhost:3000)** in your browser.
+4. **Launch the application locally**:
+   Open **[http://localhost:3000](http://localhost:3000)** in your browser or explore the production deployment at **[https://creator-ai-phi.vercel.app/](https://creator-ai-phi.vercel.app/)**.
 
 ---
 
