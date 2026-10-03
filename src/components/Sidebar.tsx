@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import {
   LayoutDashboard,
@@ -58,14 +59,16 @@ export function Sidebar() {
       <div>
         <div className="h-16 px-5 border-b border-[rgba(20,20,40,0.06)] flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5 overflow-hidden group">
-            {/* Logo Mark: play button + sparkle + neural node */}
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#635BFF] via-[#8B5CF6] to-[#EC4899] flex items-center justify-center shrink-0 shadow-[0_2px_10px_rgba(99,91,255,0.3)]">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-white">
-                <path
-                  d="M12 2L13.8 8.2C14.1 9.3 14.7 9.9 15.8 10.2L22 12L15.8 13.8C14.7 14.1 14.1 14.7 13.8 15.8L12 22L10.2 15.8C9.9 14.7 9.3 14.1 8.2 13.8L2 12L8.2 10.2C9.3 9.9 9.9 9.3 10.2 8.2L12 2Z"
-                  fill="currentColor"
-                />
-              </svg>
+            {/* Logo Mark: iridescent play button with glow */}
+            <div className="w-9 h-9 flex items-center justify-center shrink-0">
+              <Image
+                src="/logo-icon.png"
+                alt="CreatorAI"
+                width={36}
+                height={36}
+                className="w-8 h-8 object-contain transition-transform group-hover:scale-105"
+                priority
+              />
             </div>
 
             {!collapsed && (

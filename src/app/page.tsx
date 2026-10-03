@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Sparkles,
   ArrowRight,
@@ -55,19 +56,15 @@ export default function LandingPage() {
 
       {/* Top Header */}
       <header className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between relative z-40">
-        <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#635BFF] via-[#8B5CF6] to-[#EC4899] flex items-center justify-center shadow-[0_2px_10px_rgba(99,91,255,0.3)]">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="text-white">
-              <path
-                d="M12 2L13.8 8.2C14.1 9.3 14.7 9.9 15.8 10.2L22 12L15.8 13.8C14.7 14.1 14.1 14.7 13.8 15.8L12 22L10.2 15.8C9.9 14.7 9.3 14.1 8.2 13.8L2 12L8.2 10.2C9.3 9.9 9.9 9.3 10.2 8.2L12 2Z"
-                fill="currentColor"
-              />
-            </svg>
-          </div>
-          <div>
-            <span className="font-bold text-lg tracking-tight">CreatorAI</span>
-            <span className="text-[10px] text-[#68697A] block -mt-1 font-medium">Operating Platform</span>
-          </div>
+        <Link href="/" className="flex items-center gap-2.5 group">
+          <Image
+            src="/logo-full.png"
+            alt="CreatorAI Content Operations"
+            width={180}
+            height={46}
+            className="h-10 w-auto object-contain transition-transform group-hover:scale-[1.02]"
+            priority
+          />
         </Link>
 
         {/* Desktop spacer to balance header */}
@@ -455,11 +452,15 @@ export default function LandingPage() {
       {/* Footer */}
       <footer className="border-t border-[rgba(20,20,40,0.06)] bg-white py-8 px-6 text-center text-xs text-[#68697A]">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <div className="w-5 h-5 rounded-md bg-gradient-to-tr from-[#635BFF] to-[#EC4899] flex items-center justify-center text-white text-[10px] font-bold">
-              C
-            </div>
-            <span className="font-semibold text-[#17172A]">CreatorAI Platform</span>
+          <div className="flex items-center gap-2.5">
+            <Image
+              src="/logo-icon.png"
+              alt="CreatorAI"
+              width={20}
+              height={20}
+              className="w-5 h-5 object-contain"
+            />
+            <span className="font-semibold text-[#17172A]">CreatorAI Content Operations</span>
             <span>• Hackathon Edition</span>
           </div>
           <div>
