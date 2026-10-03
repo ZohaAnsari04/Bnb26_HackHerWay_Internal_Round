@@ -9,11 +9,6 @@ export async function GET(
     const { id } = await params;
     const project = await prisma.project.findUnique({
       where: { id },
-      include: {
-        assets: true,
-        opportunities: true,
-        clips: true,
-      },
     });
 
     if (!project) {

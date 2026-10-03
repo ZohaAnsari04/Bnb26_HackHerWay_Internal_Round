@@ -1,3 +1,4 @@
+// @ts-ignore - native in Node 22+
 import { DatabaseSync } from 'node:sqlite';
 import path from 'path';
 import fs from 'fs';
@@ -12,7 +13,7 @@ import {
 const dbPath = path.resolve(process.cwd(), 'dev.db');
 
 class SQLiteDatabaseClient {
-  private db: DatabaseSync;
+  private db: any;
 
   constructor() {
     this.db = new DatabaseSync(dbPath);

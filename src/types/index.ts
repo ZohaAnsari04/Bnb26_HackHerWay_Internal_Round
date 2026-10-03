@@ -123,6 +123,8 @@ export interface CalendarEvent {
   status: 'draft' | 'ready' | 'scheduled' | 'published';
   thumbnailUrl: string;
   captionExcerpt: string;
+  copyText?: string;
+  hashtags?: string[];
 }
 
 export interface PlatformCopy {

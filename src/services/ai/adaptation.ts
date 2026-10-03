@@ -52,3 +52,46 @@ export class MockAdaptationService implements AdaptationService {
 export function createAdaptationService(): AdaptationService {
   return new MockAdaptationService();
 }
+
+export function generateAllPlatformCopies(opp?: any): PlatformCopy[] {
+  const service = new MockAdaptationService();
+  return [
+    {
+      platform: 'instagram',
+      aspectRatio: '9:16',
+      title: opp?.hookText || 'You are probably using AI wrong',
+      caption: `${opp?.hookText || "You're probably using AI wrong 👀"}\n\nMost people miss the real leverage. Instead of small tweaks, rethinking the whole workflow gives you 10x output.\n\nSave this for your next project! 💡`,
+      description: 'Short-form visual takeaway for creators and builders.',
+      hashtags: ['#AI', '#Productivity', '#CreatorTools', '#TechLife', '#Innovation'],
+      callToAction: 'Drop your favorite AI tool in the comments!'
+    },
+    {
+      platform: 'youtube_shorts',
+      aspectRatio: '9:16',
+      title: opp?.title || 'The Biggest Mistake With AI Today',
+      caption: `Why 90% of developers get stuck. Subscribe for more weekly insights!`,
+      description: 'Fast vertical breakdown for builders and software engineers.',
+      hashtags: ['#Shorts', '#AI', '#Coding', '#FutureOfTech'],
+      callToAction: 'Subscribe for daily creator insights'
+    },
+    {
+      platform: 'linkedin',
+      aspectRatio: '1:1',
+      title: `Rethinking execution in the age of autonomous systems`,
+      caption: `${opp?.hookText || "AI doesn't automatically make people more productive."}\n\nThe difference between a 10% incremental gain and a 10x architectural shift comes down to feedback loops and boundaries.\n\nWhen we transition from micro-prompting to deterministic frameworks, we unlock true autonomy.\n\nHow is your organization adapting its workflow this quarter?`,
+      description: 'Thought leadership piece tailored for LinkedIn feeds.',
+      hashtags: ['#EngineeringLeadership', '#ArtificialIntelligence', '#FutureOfWork', '#Productivity'],
+      callToAction: 'Repost to start a discussion with your network.'
+    },
+    {
+      platform: 'youtube',
+      aspectRatio: '16:9',
+      title: `${opp?.title || 'CreatorAI Masterclass'} — Full Breakdown`,
+      caption: `A detailed breakdown from our latest keynote exploring systems design and autonomous tooling.`,
+      description: 'Complete high-resolution video breakdown with timestamps and architecture diagrams.',
+      hashtags: ['#AI', '#TechKeynote', '#SoftwareDesign'],
+      callToAction: 'Check the description for templates and resources.'
+    }
+  ];
+}
+
