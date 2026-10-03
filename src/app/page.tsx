@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
@@ -23,7 +23,8 @@ import {
   Flame,
   Check,
   FileVideo,
-  Clock
+  Clock,
+  Terminal
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { ScoreRing } from '@/components/ScoreRing';
@@ -250,6 +251,47 @@ export default function LandingPage() {
           </div>
         </div>
       ),
+    },
+  ];
+
+  const [activeEngineFeature, setActiveEngineFeature] = useState(0);
+
+  const engineFeatures = [
+    {
+      id: 'scoring',
+      title: 'Opportunity Scoring',
+      tag: 'Peak Retention Model',
+      desc: 'Proprietary composite algorithm weighting hook strength, information density spike, and standalone comprehension context.',
+      icon: TrendingUp,
+      accentColor: '#635BFF',
+      accentBg: 'bg-[#635BFF]/10 text-[#635BFF] border-[#635BFF]/20',
+      activeBorder: 'border-[#635BFF]/40 shadow-[0_12px_30px_-10px_rgba(99,91,255,0.2)]',
+      metric: '94.8% Retention Fit',
+      chips: ['Hook Peak Trigger', 'Pacing Velocity Spikes', 'Zero Filler Detection'],
+    },
+    {
+      id: 'framing',
+      title: 'Autonomous Aspect Framing',
+      tag: '60fps Vision-Crop Engine',
+      desc: 'Crop widescreen 16:9 keynote and interview footage into 9:16 vertical reels with active eye-line and multi-speaker tracking.',
+      icon: Scissors,
+      accentColor: '#EC4899',
+      accentBg: 'bg-[#EC4899]/10 text-[#EC4899] border-[#EC4899]/20',
+      activeBorder: 'border-[#EC4899]/40 shadow-[0_12px_30px_-10px_rgba(236,72,153,0.2)]',
+      metric: '0-Latency Tracking',
+      chips: ['Multi-Speaker Detection', 'Dynamic 9:16 Reframing', 'Sub-Pixel Stabilization'],
+    },
+    {
+      id: 'adaptation',
+      title: 'Platform-Specific Adaptation',
+      tag: 'Multi-LLM Synthesizer',
+      desc: 'Generates tailored copy, native tone, and engagement triggers for LinkedIn thought leadership, YouTube Shorts SEO, and TikTok algorithms.',
+      icon: Globe,
+      accentColor: '#06B6D4',
+      accentBg: 'bg-[#06B6D4]/10 text-[#06B6D4] border-[#06B6D4]/20',
+      activeBorder: 'border-[#06B6D4]/40 shadow-[0_12px_30px_-10px_rgba(6,182,212,0.2)]',
+      metric: '4 Native Dialects',
+      chips: ['LinkedIn Thought Leader', 'YouTube Shorts SEO', 'TikTok Viral Hooks'],
     },
   ];
 
@@ -620,60 +662,240 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* AI Content Engine Feature Deep Dive */}
-      <section id="engine" className="py-20 px-6 bg-[#FAFAF7]/60 backdrop-blur-xs">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#635BFF]">
-                Core Intelligence
+      {/* AI Content Engine Feature Deep Dive - Redesigned Interactive Intelligence Studio */}
+      <section id="engine" className="py-24 px-6 bg-gradient-to-b from-[#FAFAF7]/80 via-white/60 to-[#FAFAF7]/90 backdrop-blur-sm relative overflow-hidden border-t border-[rgba(20,20,40,0.06)]">
+        {/* Soft background ambient glow */}
+        <div className="absolute top-1/3 -left-40 w-96 h-96 bg-[#635BFF]/8 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-10 -right-40 w-96 h-96 bg-[#06B6D4]/8 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="max-w-3xl mb-14 text-left">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#635BFF]/20 shadow-xs mb-4">
+              <Cpu className="w-3.5 h-3.5 text-[#635BFF]" />
+              <span className="text-xs font-bold text-[#635BFF] tracking-wider uppercase">
+                Core Neural Architecture
               </span>
-              <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#17172A] mt-2">
-                Not a generic wrapper. A content operating system.
-              </h2>
-              <p className="text-sm text-[#68697A] mt-3 leading-relaxed">
-                Most AI video tools just add burned-in subtitles. CreatorAI analyzes semantic information density, evaluates pacing spikes, and diagnoses why an audience member stays engaged.
-              </p>
-
-              <div className="mt-6 space-y-4">
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#635BFF]/10 text-[#635BFF] flex items-center justify-center shrink-0 mt-0.5">
-                    <CheckCircle2 className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-[#17172A]">Opportunity Scoring</h4>
-                    <p className="text-xs text-[#68697A]">Composite algorithm weighting hook strength, information density, and standalone context.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#EC4899]/10 text-[#EC4899] flex items-center justify-center shrink-0 mt-0.5">
-                    <CheckCircle2 className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-[#17172A]">Autonomous Aspect Framing</h4>
-                    <p className="text-xs text-[#68697A]">Crop landscape keynote presentations into vertical 9:16 reels while keeping subjects centered.</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-[#06B6D4]/10 text-[#06B6D4] flex items-center justify-center shrink-0 mt-0.5">
-                    <CheckCircle2 className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-[#17172A]">Platform-Specific Adaptation</h4>
-                    <p className="text-xs text-[#68697A]">Generates distinct copy for LinkedIn thought leadership, YouTube Shorts descriptions, and Instagram carousels.</p>
-                  </div>
-                </div>
-              </div>
             </div>
 
-            <div className="bg-white rounded-3xl p-8 border border-[rgba(20,20,40,0.08)] shadow-[0_15px_50px_rgba(20,20,50,0.06)] flex items-center justify-center">
-              <AICoreVisual
-                size={260}
-                label="Multi-LLM Semantic Engine"
-                sublabel="Whisper large-v3 + Opportunity Scoring Diagnostic"
-              />
+            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#17172A] font-serif leading-tight">
+              Not a generic wrapper.{' '}
+              <span className="bg-gradient-to-r from-[#635BFF] via-[#EC4899] to-[#06B6D4] bg-clip-text text-transparent">
+                A content operating system.
+              </span>
+            </h2>
+
+            <p className="text-sm sm:text-base text-[#68697A] mt-4 leading-relaxed max-w-2xl">
+              Most AI video tools just add burned-in subtitles. CreatorAI deeply analyzes semantic information density, evaluates pacing drop-off spikes, and diagnoses exactly why an audience stays hooked.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+            {/* Left Column: 3 Interactive Architectural Pillars (5 cols) */}
+            <div className="lg:col-span-5 flex flex-col justify-between space-y-4">
+              {engineFeatures.map((feat, idx) => {
+                const isSelected = activeEngineFeature === idx;
+                const Icon = feat.icon;
+                return (
+                  <div
+                    key={feat.id}
+                    onClick={() => setActiveEngineFeature(idx)}
+                    onMouseEnter={() => setActiveEngineFeature(idx)}
+                    className={`cursor-pointer text-left p-5 rounded-2xl transition-all duration-300 relative border ${
+                      isSelected
+                        ? `bg-white ${feat.activeBorder} -translate-y-1`
+                        : 'bg-white/80 border-[rgba(20,20,40,0.06)] hover:bg-white hover:border-[rgba(20,20,40,0.12)]'
+                    }`}
+                  >
+                    {/* Left active colored bar */}
+                    <div
+                      className={`absolute left-0 top-3 bottom-3 w-1.5 rounded-r-full transition-all duration-300 ${
+                        isSelected ? 'opacity-100' : 'opacity-0'
+                      }`}
+                      style={{ backgroundColor: feat.accentColor }}
+                    />
+
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-3">
+                        <div
+                          className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 border shadow-2xs ${feat.accentBg}`}
+                        >
+                          <Icon className="w-4 h-4" />
+                        </div>
+                        <div>
+                          <h4 className="text-sm font-bold text-[#17172A] tracking-tight">
+                            {feat.title}
+                          </h4>
+                          <p className="text-[10px] font-semibold text-[#68697A]">
+                            {feat.tag}
+                          </p>
+                        </div>
+                      </div>
+
+                      <span
+                        className="text-[10px] font-bold px-2 py-0.5 rounded-full border shrink-0"
+                        style={{
+                          color: feat.accentColor,
+                          backgroundColor: `${feat.accentColor}12`,
+                          borderColor: `${feat.accentColor}30`,
+                        }}
+                      >
+                        {feat.metric}
+                      </span>
+                    </div>
+
+                    <p className="text-xs text-[#68697A] mt-2 leading-relaxed">
+                      {feat.desc}
+                    </p>
+
+                    {/* Technical Micro Chips */}
+                    <div className="flex flex-wrap gap-1.5 mt-3 pt-3 border-t border-[rgba(20,20,40,0.05)]">
+                      {feat.chips.map((chip) => (
+                        <span
+                          key={chip}
+                          className={`text-[9px] font-medium px-2 py-0.5 rounded-md border transition-colors ${
+                            isSelected
+                              ? 'bg-slate-50 text-[#17172A] border-slate-200/80 font-semibold'
+                              : 'bg-slate-50/60 text-[#68697A] border-slate-100'
+                          }`}
+                        >
+                          {chip}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Right Column: Neural Intelligence Console / HUD (7 cols) */}
+            <div className="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 border border-[rgba(20,20,40,0.08)] shadow-[0_20px_60px_rgba(20,20,60,0.07)] flex flex-col justify-between relative overflow-hidden">
+              {/* Corner soft ambient glow inside console */}
+              <div className="absolute top-0 right-0 w-72 h-72 bg-[#635BFF]/10 rounded-full blur-3xl pointer-events-none -z-0" />
+              <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#06B6D4]/10 rounded-full blur-3xl pointer-events-none -z-0" />
+
+              {/* Console Header Bar */}
+              <div className="relative z-10 flex flex-wrap items-center justify-between gap-3 pb-5 border-b border-[rgba(20,20,40,0.06)]">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-2.5 w-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                  <span className="text-xs font-bold text-[#17172A] tracking-tight">
+                    NEURAL ENGINE HUD
+                  </span>
+                  <span className="text-[10px] text-[#9496A8] font-mono">• ORCHESTRATION LIVE</span>
+                </div>
+
+                <div className="flex items-center gap-2 text-xs">
+                  <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-[#635BFF]/10 text-[#635BFF] border border-[#635BFF]/20 font-mono">
+                    12ms Latency
+                  </span>
+                  <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200 font-mono">
+                    ⚡ 1,480 tok/s
+                  </span>
+                </div>
+              </div>
+
+              {/* Central Core & Floating Telemetry Badges */}
+              <div className="relative z-10 my-4 py-2 flex items-center justify-center min-h-[290px]">
+                {/* Floating telemetry pills around orb */}
+                <div className="absolute top-2 left-2 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-[rgba(20,20,40,0.08)] shadow-md transition-all hover:scale-105">
+                  <div className="w-2 h-2 rounded-full bg-[#635BFF]" />
+                  <div className="text-left">
+                    <p className="text-[10px] font-bold text-[#17172A]">Whisper Large-v3</p>
+                    <p className="text-[8px] text-[#68697A]">48kHz Phonemes</p>
+                  </div>
+                </div>
+
+                <div className="absolute top-2 right-2 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-[rgba(20,20,40,0.08)] shadow-md transition-all hover:scale-105">
+                  <Flame className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
+                  <div className="text-left">
+                    <p className="text-[10px] font-bold text-[#17172A]">Virality Score: 94.8%</p>
+                    <p className="text-[8px] text-rose-600 font-semibold">High Hook Trigger</p>
+                  </div>
+                </div>
+
+                <div className="absolute bottom-2 left-2 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-[rgba(20,20,40,0.08)] shadow-md transition-all hover:scale-105">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <div className="text-left">
+                    <p className="text-[10px] font-bold text-[#17172A]">Face Tracking Lock</p>
+                    <p className="text-[8px] text-emerald-600 font-semibold">60 FPS Responsive</p>
+                  </div>
+                </div>
+
+                <div className="absolute bottom-2 right-2 z-20 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/95 backdrop-blur-md border border-[rgba(20,20,40,0.08)] shadow-md transition-all hover:scale-105">
+                  <Globe className="w-3.5 h-3.5 text-[#06B6D4]" />
+                  <div className="text-left">
+                    <p className="text-[10px] font-bold text-[#17172A]">Cross-Platform Sync</p>
+                    <p className="text-[8px] text-[#06B6D4] font-semibold">4 Channels Formatted</p>
+                  </div>
+                </div>
+
+                {/* Main Visual Core */}
+                <AICoreVisual
+                  size={240}
+                  label="Multi-LLM Semantic Engine"
+                  sublabel="Whisper large-v3 + Opportunity Scoring Diagnostic"
+                />
+              </div>
+
+              {/* Live Telemetry Log Terminal */}
+              <div className="relative z-10 p-3.5 rounded-2xl bg-slate-50 border border-slate-200/70 text-left font-mono text-xs space-y-1.5">
+                <div className="flex items-center justify-between text-[10px] text-[#9496A8] border-b border-slate-200/60 pb-1.5">
+                  <span className="flex items-center gap-1.5 text-[#17172A] font-semibold">
+                    <Terminal className="w-3 h-3 text-[#635BFF]" />
+                    Live Orchestration Telemetry
+                  </span>
+                  <span className="text-[#635BFF] font-semibold">
+                    Focus: {engineFeatures[activeEngineFeature].title}
+                  </span>
+                </div>
+
+                {activeEngineFeature === 0 && (
+                  <div className="space-y-1 text-[11px]">
+                    <p className="text-slate-700">
+                      <span className="text-[#635BFF] font-bold">[SCANNER]</span> Phoneme sequence 04:12 - 04:48 triggered 94.8% opportunity index.
+                    </p>
+                    <p className="text-[#68697A] text-[10px]">
+                      <span className="text-emerald-600 font-bold">[WEIGHTS]</span> Hook Peak: 0.94 • Pacing Velocity: +340% • Drop-off Risk: Low
+                    </p>
+                  </div>
+                )}
+
+                {activeEngineFeature === 1 && (
+                  <div className="space-y-1 text-[11px]">
+                    <p className="text-slate-700">
+                      <span className="text-[#EC4899] font-bold">[VISION-CROP]</span> Detected 2 human speakers. 9:16 responsive crop active.
+                    </p>
+                    <p className="text-[#68697A] text-[10px]">
+                      <span className="text-emerald-600 font-bold">[TRACKING]</span> 3-point face bounding lock • 60 FPS • Jitter dampening: 99.4%
+                    </p>
+                  </div>
+                )}
+
+                {activeEngineFeature === 2 && (
+                  <div className="space-y-1 text-[11px]">
+                    <p className="text-slate-700">
+                      <span className="text-[#06B6D4] font-bold">[SYNTHESIS]</span> Formatted 3 native copy variants + algorithmic hashtag clusters.
+                    </p>
+                    <p className="text-[#68697A] text-[10px]">
+                      <span className="text-emerald-600 font-bold">[TARGETS]</span> LinkedIn Thought-Leadership • TikTok Punchy • Shorts SEO
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              {/* Bottom Model Ribbon */}
+              <div className="relative z-10 mt-3 pt-3 flex flex-wrap items-center justify-between gap-2 text-[10px] text-[#68697A]">
+                <span className="font-semibold text-[#17172A]">Integrated Model Stack:</span>
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-mono">Whisper-v3</span>
+                  <span className="text-slate-300">•</span>
+                  <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-mono">Vision-Crop 2.0</span>
+                  <span className="text-slate-300">•</span>
+                  <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-mono">Claude 3.5</span>
+                  <span className="text-slate-300">•</span>
+                  <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-700 font-mono">Llama-3</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
