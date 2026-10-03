@@ -1,8 +1,11 @@
 import os
 from pydantic import BaseModel
-from dotenv import load_dotenv
 
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
 
 class Settings(BaseModel):
     PROJECT_NAME: str = "CreatorAI"
