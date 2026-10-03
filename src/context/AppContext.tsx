@@ -130,8 +130,39 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [isDemoMode, setIsDemoMode] = useState(true);
   const [toasts, setToasts] = useState<Toast[]>([]);
 
-  // Load from localStorage on client mount if available
+  // Load from Backend API on mount (with localStorage fallback)
   useEffect(() => {
+    // 1. Fetch from SQLite API
+    fetch('/api/projects')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.projects?.length > 0) {
+          setProjects(data.projects);
+          setActiveProjectState(data.projects[0]);
+        }
+      })
+      .catch(() => {});
+
+    fetch('/api/clips')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.clips?.length > 0) {
+          setClips(data.clips);
+          setActiveClip(data.clips[0]);
+        }
+      })
+      .catch(() => {});
+
+    fetch('/api/calendar')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.events?.length > 0) {
+          setCalendarEvents(data.events);
+        }
+      })
+      .catch(() => {});
+
+    // 2. Load from localStorage cache
     try {
       const savedProjects = localStorage.getItem('creatorai_projects');
       if (savedProjects) {
@@ -209,9 +240,23 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       updatedAt: 'Just now',
       createdAt: new Date().toISOString()
     };
+
+    // Update client UI immediately
     setProjects((prev) => [newProj, ...prev]);
     setActiveProjectState(newProj);
     showToast(`Project "${title}" created successfully`);
+
+    // Persist to SQLite Backend
+    fetch('/api/projects', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title,
+        description,
+        assetType,
+      }),
+    }).catch((err) => console.warn('Backend sync error:', err));
+
     return newProj;
   };
 
@@ -246,6 +291,20 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     };
     setCalendarEvents((prev) => [...prev, newEvent]);
     showToast(`Scheduled for ${newEvent.scheduledDate} at ${newEvent.scheduledTime}`);
+
+    // Persist to SQLite Backend
+    fetch('/api/calendar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: newEvent.title,
+        platform: newEvent.platform,
+        scheduledTime: newEvent.scheduledDate,
+        copyText: newEvent.copyText,
+        hashtags: newEvent.hashtags,
+        clipId: newEvent.clipId,
+      }),
+    }).catch((err) => console.warn('Calendar sync error:', err));
   };
 
   const updateCalendarEvent = (id: string, updates: Partial<CalendarEvent>) => {
@@ -368,6 +427,26 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     setClips((prev) => [newClip, ...prev]);
     setActiveClip(newClip);
     setIsGeneratingClip(false);
+
+    // Persist to SQLite Backend
+    fetch('/api/clips', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        projectId: newClip.projectId,
+        opportunityId: newClip.opportunityId,
+        title: newClip.title,
+        hookText: newClip.hookText,
+        duration: newClip.duration,
+        durationFormatted: newClip.durationFormatted,
+        aspectRatio: newClip.aspectRatio,
+        platform: newClip.platform,
+        score: newClip.score,
+        thumbnailUrl: newClip.thumbnailUrl,
+        videoUrl: newClip.videoUrl,
+        captionStyle: newClip.captionStyle,
+      }),
+    }).catch((err) => console.warn('Clip sync error:', err));
 
     // mark opportunity as generated
     setOpportunities((prev) =>
