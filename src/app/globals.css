@@ -203,3 +203,163 @@ p, span, div, a, button, input, textarea, select, label, table, nav {
 .animate-float {
   animation: float-slow 5s ease-in-out infinite;
 }
+
+/* ========================================================
+   Transparent Floating Glass Bubbles & Iridescent Sheen
+   ======================================================== */
+@keyframes bubble-rise {
+  0% {
+    transform: translate3d(0, 0, 0) scale(0.9);
+    opacity: 0;
+  }
+  5% {
+    opacity: var(--bubble-opacity, 0.85);
+  }
+  85% {
+    opacity: var(--bubble-opacity, 0.85);
+  }
+  100% {
+    transform: translate3d(var(--bubble-drift, 40px), -125vh, 0) scale(1.08);
+    opacity: 0;
+  }
+}
+
+@keyframes bubble-bob {
+  0%, 100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  25% {
+    transform: translate(16px, -28px) scale(1.04);
+  }
+  50% {
+    transform: translate(-14px, -46px) scale(0.97);
+  }
+  75% {
+    transform: translate(12px, -18px) scale(1.02);
+  }
+}
+
+@keyframes bubble-wobble-1 {
+  0%, 100% {
+    border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+  }
+  33% {
+    border-radius: 44% 56% 47% 53% / 53% 47% 55% 45%;
+  }
+  66% {
+    border-radius: 54% 46% 53% 47% / 46% 54% 47% 53%;
+  }
+}
+
+@keyframes bubble-shimmer {
+  0%, 100% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(35deg);
+  }
+}
+
+/* Base Glass Bubble Style */
+.floating-glass-bubble {
+  position: absolute;
+  border-radius: 50%;
+  border: none;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 30% 28%,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.35) 22%,
+    rgba(99, 91, 255, 0.22) 50%,
+    rgba(236, 72, 153, 0.25) 78%,
+    rgba(6, 182, 212, 0.28) 100%
+  );
+  box-shadow: 
+    inset 0 0 12px rgba(255, 255, 255, 0.95),
+    inset 6px 6px 16px rgba(255, 255, 255, 0.95),
+    inset -8px -8px 20px rgba(99, 91, 255, 0.45),
+    inset -3px -3px 10px rgba(236, 72, 153, 0.35),
+    0 10px 32px rgba(99, 91, 255, 0.18);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  will-change: transform, opacity;
+}
+
+/* Glass reflection glint inside the bubble */
+.floating-glass-bubble::before {
+  content: '';
+  position: absolute;
+  top: 13%;
+  left: 17%;
+  width: 26%;
+  height: 16%;
+  border-radius: 50%;
+  background: #FFFFFF;
+  opacity: 0.95;
+  transform: rotate(-35deg);
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+}
+
+.floating-glass-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: 14%;
+  right: 18%;
+  width: 15%;
+  height: 10%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.85);
+  transform: rotate(-25deg);
+}
+
+/* Color Tint Variants */
+.bubble-tint-violet {
+  background: radial-gradient(
+    circle at 30% 28%,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(255, 255, 255, 0.35) 20%,
+    rgba(139, 92, 246, 0.25) 50%,
+    rgba(99, 91, 255, 0.32) 80%,
+    rgba(236, 72, 153, 0.22) 100%
+  );
+  box-shadow: 
+    inset 0 0 14px rgba(255, 255, 255, 0.95),
+    inset 6px 6px 16px rgba(255, 255, 255, 0.95),
+    inset -8px -8px 22px rgba(139, 92, 246, 0.48),
+    0 10px 32px rgba(139, 92, 246, 0.2);
+}
+
+.bubble-tint-cyan {
+  background: radial-gradient(
+    circle at 30% 28%,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(255, 255, 255, 0.35) 22%,
+    rgba(6, 182, 212, 0.26) 50%,
+    rgba(99, 91, 255, 0.25) 80%,
+    rgba(59, 130, 246, 0.22) 100%
+  );
+  box-shadow: 
+    inset 0 0 14px rgba(255, 255, 255, 0.95),
+    inset 6px 6px 16px rgba(255, 255, 255, 0.95),
+    inset -8px -8px 22px rgba(6, 182, 212, 0.48),
+    0 10px 32px rgba(6, 182, 212, 0.2);
+}
+
+.bubble-tint-pink {
+  background: radial-gradient(
+    circle at 30% 28%,
+    rgba(255, 255, 255, 0.92) 0%,
+    rgba(255, 255, 255, 0.35) 22%,
+    rgba(236, 72, 153, 0.28) 50%,
+    rgba(244, 114, 182, 0.22) 80%,
+    rgba(139, 92, 246, 0.25) 100%
+  );
+  box-shadow: 
+    inset 0 0 14px rgba(255, 255, 255, 0.95),
+    inset 6px 6px 16px rgba(255, 255, 255, 0.95),
+    inset -8px -8px 22px rgba(236, 72, 153, 0.48),
+    0 10px 32px rgba(236, 72, 153, 0.2);
+}
+
+
+

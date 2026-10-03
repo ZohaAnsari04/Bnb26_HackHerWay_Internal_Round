@@ -27,7 +27,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
-      <body className="bg-[#FAFAF7] text-[#17172A] selection:bg-[#635BFF]/15 selection:text-[#635BFF] min-h-screen">
+      <body className="bg-[#FAFAF7] text-[#17172A] selection:bg-[#635BFF]/15 selection:text-[#635BFF] min-h-screen relative overflow-x-hidden">
         <AppProvider>
           {children}
         </AppProvider>
@@ -35,3 +35,4 @@ export default function RootLayout({
     </html>
   );
 }
+

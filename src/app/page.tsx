@@ -22,6 +22,7 @@ import {
 import { motion } from 'framer-motion';
 import { ScoreRing } from '@/components/ScoreRing';
 import { AICoreVisual } from '@/components/AICoreVisual';
+import { FloatingBubbles } from '@/components/FloatingBubbles';
 
 export default function LandingPage() {
   const steps = [
@@ -33,7 +34,8 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#FAFAF7] text-[#17172A] selection:bg-[#635BFF]/15 selection:text-[#635BFF]">
+    <div className="min-h-screen bg-transparent text-[#17172A] selection:bg-[#635BFF]/15 selection:text-[#635BFF] relative">
+      <FloatingBubbles />
       {/* Top Header */}
       <header className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5">
@@ -277,7 +279,7 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-20 px-6 border-t border-[rgba(20,20,40,0.06)] bg-white">
+      <section id="how-it-works" className="py-20 px-6 border-t border-[rgba(20,20,40,0.06)] bg-white/75 backdrop-blur-sm">
         <div className="max-w-6xl mx-auto">
           <div className="text-center max-w-2xl mx-auto mb-16">
             <span className="text-xs font-bold uppercase tracking-wider text-[#635BFF]">
@@ -311,7 +313,7 @@ export default function LandingPage() {
       </section>
 
       {/* AI Content Engine Feature Deep Dive */}
-      <section id="engine" className="py-20 px-6 bg-[#FAFAF7]">
+      <section id="engine" className="py-20 px-6 bg-[#FAFAF7]/60 backdrop-blur-xs">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -370,7 +372,7 @@ export default function LandingPage() {
       </section>
 
       {/* Content Pipeline / Lifecycle Section */}
-      <section id="workflow" className="py-20 px-6 bg-white border-t border-[rgba(20,20,40,0.06)]">
+      <section id="workflow" className="py-20 px-6 bg-white/75 backdrop-blur-sm border-t border-[rgba(20,20,40,0.06)]">
         <div className="max-w-6xl mx-auto text-center">
           <span className="text-xs font-bold uppercase tracking-wider text-[#635BFF]">
             Content Pipeline
@@ -411,7 +413,7 @@ export default function LandingPage() {
       </section>
 
       {/* Final Call to Action */}
-      <section className="py-20 px-6 bg-gradient-to-b from-[#FAFAF7] to-[#F7F8FC] border-t border-[rgba(20,20,40,0.06)]">
+      <section className="py-20 px-6 bg-gradient-to-b from-[#FAFAF7]/75 to-[#F7F8FC]/75 backdrop-blur-xs border-t border-[rgba(20,20,40,0.06)]">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#17172A]">
             Ready to upgrade your creator operating system?
