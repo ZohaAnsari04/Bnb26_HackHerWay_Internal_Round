@@ -418,7 +418,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
       thumbnailUrl:
         activeProject?.thumbnailUrl ||
         'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80',
-      videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+      videoUrl: '/videos/sample-clip.mp4',
       status: 'ready',
       captionStyle: selectedCaptionStyle,
       createdAt: new Date().toISOString()

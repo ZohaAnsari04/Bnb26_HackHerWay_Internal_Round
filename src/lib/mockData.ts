@@ -77,7 +77,7 @@ export const INITIAL_ASSETS: Asset[] = [
     durationSeconds: 642,
     durationFormatted: '10:42',
     thumbnailUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
-    fileUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+    fileUrl: '/videos/sample-keynote.mp4',
     status: 'analyzed',
     topics: ['AI', 'Engineering', 'Agents'],
     createdAt: '2026-03-28T09:40:00Z',
@@ -305,7 +305,7 @@ export const INITIAL_CLIPS: GeneratedClip[] = [
     platform: 'instagram',
     score: 92,
     thumbnailUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+    videoUrl: '/videos/sample-clip.mp4',
     status: 'ready',
     captionStyle: {
       id: 'dynamic',
@@ -330,7 +330,7 @@ export const INITIAL_CLIPS: GeneratedClip[] = [
     platform: 'youtube_shorts',
     score: 89,
     thumbnailUrl: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+    videoUrl: '/videos/sample-clip.mp4',
     status: 'ready',
     captionStyle: {
       id: 'bold',
@@ -356,7 +356,7 @@ export const INITIAL_CLIPS: GeneratedClip[] = [
     platform: 'linkedin',
     score: 86,
     thumbnailUrl: 'https://images.unsplash.com/photo-1534972195531-a756b1126f24?auto=format&fit=crop&w=600&q=80',
-    videoUrl: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4',
+    videoUrl: '/videos/sample-clip.mp4',
     status: 'ready',
     captionStyle: {
       id: 'minimal',

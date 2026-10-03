@@ -181,8 +181,20 @@ export default function StudioPage() {
               <div className="relative aspect-video rounded-xl bg-black overflow-hidden group flex items-center justify-center">
                 <video
                   ref={videoRef}
-                  src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                  src="/videos/sample-keynote.mp4"
                   onTimeUpdate={handleTimeUpdate}
+                  onLoadedMetadata={() => {
+                    if (videoRef.current && videoRef.current.duration) {
+                      setDuration(videoRef.current.duration);
+                    }
+                  }}
+                  onError={(e) => {
+                    console.warn('Video failed to load source, falling back to local keynote video');
+                    if (videoRef.current && !videoRef.current.src.endsWith('/videos/sample-keynote.mp4')) {
+                      videoRef.current.src = '/videos/sample-keynote.mp4';
+                      videoRef.current.load();
+                    }
+                  }}
                   className="w-full h-full object-cover"
                   playsInline
                 />

@@ -18,16 +18,19 @@ import {
   Calendar,
   Sparkles,
   ExternalLink,
-  Trash2
+  Trash2,
+  X
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { Asset } from '@/types';
 
 export default function LibraryPage() {
-  const { assets, setIsUploadModalOpen, showToast } = useApp();
+  const { assets, projects, setActiveProject, setIsUploadModalOpen, showToast } = useApp();
   const [activeTab, setActiveTab] = useState<'all' | 'video' | 'audio' | 'image' | 'script'>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTopic, setSelectedTopic] = useState<string>('all');
+  const [previewAsset, setPreviewAsset] = useState<Asset | null>(null);
 
   const filteredAssets = assets.filter((asset) => {
     const matchesTab = activeTab === 'all' || asset.type === activeTab;
@@ -173,14 +176,18 @@ export default function LibraryPage() {
                   )}
 
                   {/* Play Button Overlay on Hover */}
-                  <Link
-                    href="/studio"
-                    className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                  <button
+                    onClick={() => {
+                      const proj = projects.find(p => p.id === asset.projectId) || projects[0];
+                      if (proj) setActiveProject(proj);
+                      setPreviewAsset(asset);
+                    }}
+                    className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center cursor-pointer"
                   >
                     <div className="w-12 h-12 rounded-full bg-white text-[#17172A] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
                       <Play className="w-5 h-5 fill-[#17172A] ml-0.5" />
                     </div>
-                  </Link>
+                  </button>
 
                   {/* AI Analyzed Badge */}
                   <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/95 backdrop-blur-md border border-[rgba(20,20,40,0.08)] shadow-xs">
@@ -226,6 +233,10 @@ export default function LibraryPage() {
 
                     <Link
                       href="/studio"
+                      onClick={() => {
+                        const proj = projects.find(p => p.id === asset.projectId) || projects[0];
+                        if (proj) setActiveProject(proj);
+                      }}
                       className="text-xs font-semibold text-[#635BFF] hover:underline flex items-center gap-1"
                     >
                       <Sparkles className="w-3 h-3" />
@@ -235,6 +246,87 @@ export default function LibraryPage() {
                 </div>
               </motion.div>
             ))}
+          </div>
+        )}
+
+        {/* In-Library Media Playback Preview Modal */}
+        {previewAsset && (
+          <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4">
+            <div className="bg-white rounded-3xl max-w-2xl w-full overflow-hidden shadow-2xl border border-white/20 animate-in fade-in zoom-in-95 duration-200">
+              <div className="p-4 border-b border-slate-100 flex items-center justify-between bg-white">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-lg bg-[#635BFF]/10 text-[#635BFF] flex items-center justify-center">
+                    {previewAsset.type === 'audio' ? <FileAudio className="w-4 h-4" /> : <Film className="w-4 h-4" />}
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-[#17172A] truncate max-w-md">{previewAsset.name}</h3>
+                    <p className="text-[10px] text-[#68697A]">CreatorAI Studio Media Player</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setPreviewAsset(null)}
+                  className="p-1.5 rounded-xl hover:bg-slate-100 text-slate-500 transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="relative aspect-video bg-black flex items-center justify-center">
+                {previewAsset.type === 'audio' ? (
+                  <div className="flex flex-col items-center justify-center p-8 text-white w-full h-full bg-gradient-to-br from-[#17172A] to-[#2D2D44]">
+                    <FileAudio className="w-16 h-16 text-[#635BFF] mb-3 animate-pulse" />
+                    <p className="text-xs text-slate-300 font-mono mb-4">{previewAsset.name}</p>
+                    <audio
+                      src={previewAsset.fileUrl || '/videos/sample-keynote.mp4'}
+                      controls
+                      autoPlay
+                      className="w-full max-w-md"
+                    />
+                  </div>
+                ) : (
+                  <video
+                    src={previewAsset.fileUrl || '/videos/sample-keynote.mp4'}
+                    controls
+                    autoPlay
+                    playsInline
+                    className="w-full h-full object-contain"
+                    onError={(e) => {
+                      if (!e.currentTarget.src.endsWith('/videos/sample-keynote.mp4')) {
+                        e.currentTarget.src = '/videos/sample-keynote.mp4';
+                        e.currentTarget.load();
+                      }
+                    }}
+                  />
+                )}
+              </div>
+
+              <div className="p-4 bg-slate-50 flex items-center justify-between">
+                <div className="flex items-center gap-2 text-xs text-[#68697A]">
+                  <span className="font-semibold text-[#17172A]">{previewAsset.durationFormatted || '10:42'}</span>
+                  <span>•</span>
+                  <span className="uppercase text-[10px] font-mono px-2 py-0.5 rounded bg-white border border-slate-200 text-slate-700">
+                    {previewAsset.type}
+                  </span>
+                  <span>•</span>
+                  <span className="text-emerald-600 font-semibold flex items-center gap-1">
+                    <CheckCircle2 className="w-3.5 h-3.5" /> High-Fidelity Ready
+                  </span>
+                </div>
+
+                <Link
+                  href="/studio"
+                  onClick={() => {
+                    const proj = projects.find(p => p.id === previewAsset.projectId) || projects[0];
+                    if (proj) setActiveProject(proj);
+                    setPreviewAsset(null);
+                  }}
+                  className="px-4 py-2 rounded-xl text-xs font-semibold btn-primary-gradient flex items-center gap-1.5 shadow-xs"
+                >
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Open in AI Studio</span>
+                </Link>
+              </div>
+            </div>
           </div>
         )}
       </div>
