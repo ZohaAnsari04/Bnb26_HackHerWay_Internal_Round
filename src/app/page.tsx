@@ -22,7 +22,8 @@ import {
 import { motion } from 'framer-motion';
 import { ScoreRing } from '@/components/ScoreRing';
 import { AICoreVisual } from '@/components/AICoreVisual';
-import { FloatingBubbles } from '@/components/FloatingBubbles';
+import { FloatingAppIcons } from '@/components/FloatingAppIcons';
+import { ColorfulBackgroundGlow } from '@/components/ColorfulBackgroundGlow';
 import { NavBar } from '@/components/ui/tubelight-navbar';
 
 export default function LandingPage() {
@@ -42,8 +43,13 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-transparent text-[#17172A] selection:bg-[#635BFF]/15 selection:text-[#635BFF] relative">
-      <FloatingBubbles />
+    <div className="min-h-screen bg-transparent text-[#17172A] selection:bg-[#635BFF]/15 selection:text-[#635BFF] relative overflow-hidden">
+      {/* Dynamic Colorful Aurora Mesh Glows in background */}
+      <ColorfulBackgroundGlow />
+
+      {/* Floating Social Media & Content Creation Apps in background */}
+      <FloatingAppIcons />
+
       {/* Floating Tubelight Navigation Bar */}
       <NavBar items={navItems} />
 
@@ -88,7 +94,7 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="relative pt-16 pb-24 px-6 overflow-hidden">
         {/* Soft background ambient gradient washes */}
-        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[900px] h-[500px] bg-gradient-to-b from-[#635BFF]/10 via-[#EC4899]/5 to-transparent rounded-full filter blur-3xl pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1050px] h-[580px] bg-[radial-gradient(ellipse_60%_50%_at_50%_20%,rgba(99,91,255,0.25),rgba(236,72,153,0.2),rgba(6,182,212,0.14),transparent)] rounded-full filter blur-3xl pointer-events-none" />
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <motion.div

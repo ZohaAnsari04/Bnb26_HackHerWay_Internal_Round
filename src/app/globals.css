@@ -370,5 +370,95 @@ p, span, div, a, button, input, textarea, select, label, table, nav {
     0 10px 32px rgba(236, 72, 153, 0.2);
 }
 
+/* ========================================================
+   Floating Social Media & Creator App Badges
+   ======================================================== */
+@keyframes float-app-drift {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate3d(6px, -18px, 0) rotate(2deg);
+  }
+  50% {
+    transform: translate3d(-8px, -32px, 0) rotate(-1.5deg);
+  }
+  75% {
+    transform: translate3d(5px, -14px, 0) rotate(1deg);
+  }
+}
+
+.floating-app-badge {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1.5px solid rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  box-shadow: 
+    0 2px 4px rgba(20, 20, 40, 0.02),
+    0 12px 28px rgba(30, 30, 70, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+  pointer-events: none;
+  user-select: none;
+  will-change: transform;
+}
+
+/* ========================================================
+   Colorful Ambient Glow Animations
+   ======================================================== */
+@keyframes ambient-glow-pulse {
+  0%, 100% {
+    transform: scale(1) translate3d(0, 0, 0);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.1) translate3d(14px, -10px, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes ambient-glow-drift-1 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(30px, -20px, 0) scale(1.06);
+  }
+  66% {
+    transform: translate3d(-20px, 16px, 0) scale(0.96);
+  }
+}
+
+@keyframes ambient-glow-drift-2 {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(-35px, 24px, 0) scale(0.95);
+  }
+  66% {
+    transform: translate3d(24px, -18px, 0) scale(1.05);
+  }
+}
+
+.animate-glow-pulse {
+  animation: ambient-glow-pulse 9s ease-in-out infinite;
+}
+
+.animate-glow-drift-1 {
+  animation: ambient-glow-drift-1 13s ease-in-out infinite;
+}
+
+.animate-glow-drift-2 {
+  animation: ambient-glow-drift-2 15s ease-in-out infinite;
+}
+
+
+
 
 
