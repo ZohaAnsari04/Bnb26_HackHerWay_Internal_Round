@@ -12,8 +12,8 @@ interface ScoreRingProps {
 
 export function ScoreRing({
   score,
-  size = 48,
-  strokeWidth = 3.5,
+  size = 54,
+  strokeWidth = 4.5,
   onClick,
   showLabel = true
 }: ScoreRingProps) {
@@ -21,7 +21,15 @@ export function ScoreRing({
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference - (score / 100) * circumference;
 
-  const strokeColor = score >= 90 ? '#635BFF' : score >= 85 ? '#8B5CF6' : '#EC4899';
+  // Determine accent color based on score tier
+  const getColor = (s: number) => {
+    if (s >= 90) return '#635BFF'; // Primary Royal Violet
+    if (s >= 80) return '#8B5CF6'; // Purple
+    if (s >= 70) return '#06B6D4'; // AI Cyan
+    return '#F59E0B';              // Amber
+  };
+
+  const strokeColor = getColor(score);
 
   return (
     <div
@@ -29,7 +37,7 @@ export function ScoreRing({
       role={onClick ? 'button' : undefined}
       tabIndex={onClick ? 0 : undefined}
       title={onClick ? 'Click to see Opportunity Score breakdown' : undefined}
-      className={`relative inline-flex items-center justify-center select-none bg-white rounded-full shadow-[0_2px_8px_rgba(30,20,80,0.08)] ${
+      className={`relative inline-flex items-center justify-center select-none ${
         onClick ? 'cursor-pointer hover:scale-105 transition-transform group' : ''
       }`}
       style={{ width: size, height: size }}
@@ -40,7 +48,7 @@ export function ScoreRing({
           cx={size / 2}
           cy={size / 2}
           r={radius}
-          stroke="rgba(99, 91, 255, 0.12)"
+          stroke="rgba(20, 20, 40, 0.08)"
           strokeWidth={strokeWidth}
           fill="transparent"
         />
@@ -55,12 +63,12 @@ export function ScoreRing({
           strokeDashoffset={strokeDashoffset}
           strokeLinecap="round"
           fill="transparent"
-          className="transition-all duration-800 ease-out"
+          className="transition-all duration-700 ease-out"
         />
       </svg>
       {showLabel && (
         <div className="absolute inset-0 flex flex-col items-center justify-center leading-none">
-          <span className="font-bold text-[14px] text-[#17172A] tracking-tight group-hover:text-[#635BFF] transition-colors">
+          <span className="font-bold text-[13px] text-[#17172A] tracking-tight group-hover:text-[#635BFF] transition-colors">
             {score}
           </span>
         </div>

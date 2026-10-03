@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  /* CreatorAI Strict Light Color Palette matching Reference Visual */
-  --bg-main: #F8F8FC;
-  --bg-subtle: #F1F2F9;
+  /* CreatorAI Strict Light Color Palette */
+  --bg-main: #FAFAF7;
+  --bg-subtle: #F7F8FC;
   --bg-card: #FFFFFF;
   --text-primary: #17172A;
-  --text-secondary: #6B6B7A;
-  --text-muted: #9898A7;
+  --text-secondary: #68697A;
+  --text-muted: #9496A8;
   
   --accent-primary: #635BFF;
   --accent-secondary: #8B5CF6;
@@ -16,31 +16,46 @@
   --accent-success: #22C55E;
   --accent-warning: #F59E0B;
   
-  --border-subtle: rgba(20, 20, 40, 0.06);
-  --border-medium: rgba(20, 20, 40, 0.10);
+  --border-subtle: rgba(20, 20, 40, 0.07);
+  --border-medium: rgba(20, 20, 40, 0.12);
   --border-focus: rgba(99, 91, 255, 0.35);
 
-  --shadow-card: 0 4px 20px rgba(30, 20, 80, 0.04), 0 1px 3px rgba(30, 20, 80, 0.02);
-  --shadow-hover: 0 12px 32px rgba(30, 20, 80, 0.08), 0 2px 6px rgba(30, 20, 80, 0.03);
-  --shadow-float: 0 20px 48px rgba(30, 20, 80, 0.12), 0 4px 12px rgba(30, 20, 80, 0.05);
+  --shadow-card: 0 4px 20px rgba(23, 23, 42, 0.04), 0 1px 3px rgba(23, 23, 42, 0.02);
+  --shadow-hover: 0 12px 32px rgba(23, 23, 42, 0.08), 0 2px 6px rgba(23, 23, 42, 0.03);
+  --shadow-float: 0 20px 48px rgba(30, 30, 70, 0.12), 0 4px 12px rgba(30, 30, 70, 0.06);
+  --shadow-glow: 0 0 24px rgba(99, 91, 255, 0.2);
 
   --gradient-primary: linear-gradient(135deg, #635BFF 0%, #8B5CF6 50%, #EC4899 100%);
-  --gradient-cta: linear-gradient(135deg, #635BFF 0%, #7C3AED 50%, #EC4899 100%);
   --gradient-ai: linear-gradient(135deg, #06B6D4 0%, #635BFF 100%);
-  --gradient-soft: linear-gradient(180deg, rgba(248, 248, 252, 0.7) 0%, rgba(255, 255, 255, 0.9) 100%);
+  --gradient-soft: linear-gradient(180deg, rgba(247, 248, 252, 0.7) 0%, rgba(250, 250, 247, 0.9) 100%);
+
+  /* Typography Families */
+  --font-serif-heading: Georgia, 'Times New Roman', Times, serif;
+  --font-body: var(--font-montserrat), 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 /* Force light theme across entire app - never allow dark mode override */
 html, body {
   background-color: var(--bg-main);
   color: var(--text-primary);
-  font-family: var(--font-montserrat), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-family: var(--font-body);
   min-height: 100vh;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings strict Georgia typography */
+h1, h2, h3, h4, h5, h6, .font-heading, .heading-georgia {
+  font-family: var(--font-serif-heading) !important;
+  letter-spacing: -0.015em;
+}
+
+/* General text elements fallback to Montserrat */
+p, span, div, a, button, input, textarea, select, label, table, nav {
+  font-family: inherit;
 }
 
 /* Custom scrollbars */
@@ -52,32 +67,31 @@ html, body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(23, 23, 42, 0.12);
+  background: rgba(23, 23, 42, 0.15);
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(23, 23, 42, 0.22);
+  background: rgba(23, 23, 42, 0.25);
 }
 
-/* Modern Card Classes matching Reference */
+/* Modern Card Classes */
 .card-clean {
   background: #FFFFFF;
   border: 1px solid var(--border-subtle);
-  border-radius: 20px;
+  border-radius: 18px;
   box-shadow: var(--shadow-card);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .card-clean:hover {
   box-shadow: var(--shadow-hover);
-  border-color: rgba(99, 91, 255, 0.16);
-  transform: translateY(-2px);
+  border-color: rgba(99, 91, 255, 0.18);
 }
 
 .card-flat {
   background: #FFFFFF;
   border: 1px solid var(--border-subtle);
-  border-radius: 18px;
+  border-radius: 16px;
 }
 
 /* Gradient text */
@@ -93,33 +107,40 @@ html, body {
   -webkit-text-fill-color: transparent;
 }
 
-/* Primary Button Styling with subtle hover lift and scale */
+/* Primary Button Styling */
 .btn-primary-gradient {
-  background: var(--gradient-cta);
+  background: var(--gradient-primary);
   color: #FFFFFF;
-  font-weight: 600;
+  font-weight: 500;
   border-radius: 12px;
-  box-shadow: 0 4px 14px rgba(99, 91, 255, 0.28);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(99, 91, 255, 0.3);
+  transition: all 0.2s ease;
 }
 
 .btn-primary-gradient:hover {
-  box-shadow: 0 8px 24px rgba(99, 91, 255, 0.4);
-  transform: translateY(-1.5px) scale(1.01);
+  box-shadow: 0 6px 20px rgba(99, 91, 255, 0.45);
+  transform: translateY(-1px);
 }
 
 .btn-primary-gradient:active {
-  transform: translateY(0) scale(0.99);
+  transform: translateY(0);
+}
+
+/* Subtle glow badge */
+.badge-ai {
+  background: rgba(99, 91, 255, 0.08);
+  color: #635BFF;
+  border: 1px solid rgba(99, 91, 255, 0.16);
 }
 
 /* Pulse animation for AI Core */
 @keyframes orb-pulse {
   0%, 100% {
     transform: scale(1);
-    opacity: 0.9;
+    opacity: 0.85;
   }
   50% {
-    transform: scale(1.06);
+    transform: scale(1.08);
     opacity: 1;
   }
 }
@@ -129,7 +150,7 @@ html, body {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-6px) rotate(1.5deg);
+    transform: translateY(-8px) rotate(2deg);
   }
 }
 
@@ -138,5 +159,5 @@ html, body {
 }
 
 .animate-float {
-  animation: float-slow 4.5s ease-in-out infinite;
+  animation: float-slow 5s ease-in-out infinite;
 }
