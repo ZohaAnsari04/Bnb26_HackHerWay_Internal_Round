@@ -226,7 +226,7 @@ export default function EditorPage({ params }: EditorPageProps) {
         {/* 3-Column Studio Workspace: Left Tools Rail (2 cols), Center Preview (6 cols), Right Inspector (4 cols) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
           {/* LEFT TOOLS RAIL (Prompt Section 16: Trim, Crop, Captions, Hook, Audio, Brand, Format) */}
-          <div className="lg:col-span-2 card-clean card-premium p-2 flex lg:flex-col gap-1 overflow-x-auto">
+          <div className="lg:col-span-2 card-clean p-2 flex lg:flex-col gap-1 overflow-x-auto">
             {[
               { id: 'captions', label: 'Captions', icon: Type },
               { id: 'hook', label: 'Opening Hook', icon: Sparkles },
@@ -244,7 +244,7 @@ export default function EditorPage({ params }: EditorPageProps) {
                   onClick={() => setActiveTool(tool.id as any)}
                   className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all whitespace-nowrap ${
                     isActive
-                      ? 'bg-[#F3F0FF] text-[#635BFF] shadow-2xs font-bold border border-[#635BFF]/20'
+                      ? 'bg-[#F3F0FF] text-[#635BFF] shadow-2xs'
                       : 'text-[#68697A] hover:text-[#17172A] hover:bg-[#FAFAF7]'
                   }`}
                 >
@@ -257,7 +257,7 @@ export default function EditorPage({ params }: EditorPageProps) {
 
           {/* CENTER PREVIEW (Video Canvas + Dynamic Caption Overlay + Aspect Ratio framing) */}
           <div className="lg:col-span-6 space-y-3">
-            <div className="card-clean card-premium p-4 flex flex-col items-center justify-center bg-[#F7F8FC] min-h-[460px]">
+            <div className="card-clean p-4 flex flex-col items-center justify-center bg-[#F7F8FC] min-h-[460px]">
               {/* Aspect Ratio Viewport Container */}
               <div
                 className={`relative bg-[#17172A] rounded-2xl overflow-hidden shadow-lg transition-all duration-300 flex items-center justify-center ${
@@ -365,7 +365,7 @@ export default function EditorPage({ params }: EditorPageProps) {
             </div>
 
             {/* BOTTOM TIMELINE (Prompt Section 16: Video track, Caption track, Hook track, Audio waveform) */}
-            <div className="card-clean card-premium p-4 space-y-2.5 bg-white">
+            <div className="card-clean p-4 space-y-2 bg-white">
               <div className="flex items-center justify-between text-xs pb-1 border-b border-[rgba(20,20,40,0.06)]">
                 <span className="font-bold text-[#17172A]">Multi-Track Timeline</span>
                 <span className="text-[11px] text-[#68697A]">45.0s Region</span>
@@ -381,10 +381,10 @@ export default function EditorPage({ params }: EditorPageProps) {
                 }}
               >
                 <div
-                  className="h-full bg-gradient-to-r from-[#635BFF] to-[#EC4899] rounded-full relative"
+                  className="h-full bg-[#635BFF] rounded-full relative"
                   style={{ width: `${(playbackTime / clipDuration) * 100}%` }}
                 >
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-[#17172A] border-2 border-white shadow-md" />
+                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-[#17172A] border-2 border-white shadow" />
                 </div>
               </div>
 
@@ -434,10 +434,10 @@ export default function EditorPage({ params }: EditorPageProps) {
           <div className="lg:col-span-4 space-y-4">
             {/* Tool: Captions Settings */}
             {activeTool === 'captions' && (
-              <div className="card-clean card-premium p-5 space-y-4">
+              <div className="card-clean p-5 space-y-4">
                 <div className="flex items-center justify-between pb-2 border-b border-[rgba(20,20,40,0.06)]">
                   <h3 className="text-sm font-bold text-[#17172A]">Caption Styling</h3>
-                  <span className="badge-soft-purple text-[11px] font-bold px-2 py-0.5 rounded-full">AI Synced</span>
+                  <span className="text-[11px] text-[#635BFF] font-semibold">AI Synced</span>
                 </div>
 
                 {/* Preset Style: Minimal, Bold, Dynamic */}

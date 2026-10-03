@@ -2,17 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { useApp } from '@/context/AppContext';
-import {
-  UploadCloud,
-  Film,
-  FileAudio,
-  FileText,
-  Image as ImageIcon,
-  X,
-  Check,
-  ArrowRight,
-  Sparkles
-} from 'lucide-react';
+import { UploadCloud, Film, FileAudio, FileText, Image as ImageIcon, X, Check, ArrowRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export function UploadModal() {
@@ -97,50 +87,45 @@ export function UploadModal() {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={() => !isUploading && setIsUploadModalOpen(false)}
-          className="fixed inset-0 bg-[#17172A]/35 backdrop-blur-sm"
+          className="fixed inset-0 bg-[#17172A]/30 backdrop-blur-sm"
         />
 
-        {/* Modal Window with 24px radius, soft ambient glow */}
+        {/* Modal Card */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.97, y: 12 }}
+          initial={{ opacity: 0, scale: 0.95, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.97, y: 12 }}
-          transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          className="relative w-full max-w-lg bg-white rounded-3xl shadow-[0_25px_80px_rgba(45,35,100,0.18)] border border-[rgba(99,91,255,0.12)] overflow-hidden z-10"
+          exit={{ opacity: 0, scale: 0.95, y: 10 }}
+          className="relative w-full max-w-lg bg-white rounded-2xl shadow-[0_24px_70px_rgba(20,20,50,0.18)] border border-[rgba(20,20,40,0.08)] overflow-hidden z-10"
         >
-          {/* Subtle Ambient Radial Wash */}
-          <div className="absolute -top-20 -right-20 w-60 h-60 bg-[#635BFF]/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-[#EC4899]/8 rounded-full blur-3xl pointer-events-none" />
-
           {/* Header */}
-          <div className="px-6 py-5 border-b border-[rgba(20,20,40,0.06)] flex items-center justify-between relative z-10">
+          <div className="px-6 py-5 border-b border-[rgba(20,20,40,0.06)] flex items-center justify-between">
             <div>
-              <h3 className="text-lg font-bold text-[#17172A] tracking-tight">Bring your content to life</h3>
+              <h3 className="text-lg font-semibold text-[#17172A] tracking-tight">Bring your content to life</h3>
               <p className="text-xs text-[#68697A] mt-0.5">Upload any raw recording or script to begin AI content orchestration</p>
             </div>
             {!isUploading && (
               <button
                 onClick={() => setIsUploadModalOpen(false)}
-                className="p-1.5 rounded-xl text-[#68697A] hover:text-[#17172A] hover:bg-black/5 transition-colors"
+                className="p-1.5 rounded-lg text-[#68697A] hover:text-[#17172A] hover:bg-black/5 transition-colors"
               >
                 <X className="w-4 h-4" />
               </button>
             )}
           </div>
 
-          <div className="p-6 space-y-5 relative z-10">
-            {/* Drag & Drop Zone with Soft Lavender Background & Floating Elements (Section 14) */}
+          <div className="p-6 space-y-5">
+            {/* Drag & Drop Zone */}
             <div
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
               onClick={() => !isUploading && fileInputRef.current?.click()}
-              className={`relative border-2 border-dashed rounded-3xl p-8 text-center cursor-pointer transition-all overflow-hidden ${
+              className={`border-2 border-dashed rounded-2xl p-8 text-center cursor-pointer transition-all ${
                 isDragging
-                  ? 'border-[#635BFF] bg-[#F3F0FF]/80 shadow-md'
+                  ? 'border-[#635BFF] bg-[#635BFF]/5'
                   : selectedFile
-                  ? 'border-[#22C55E] bg-[#22C55E]/5 shadow-xs'
-                  : 'border-[#635BFF]/25 bg-gradient-to-b from-[#F8F7FF] via-[#FAF9FE] to-white hover:border-[#635BFF]/60 hover:shadow-sm'
+                  ? 'border-[#22C55E] bg-[#22C55E]/5'
+                  : 'border-[rgba(20,20,40,0.12)] hover:border-[#635BFF]/50 hover:bg-[#FAFAF7]'
               }`}
             >
               <input
@@ -151,72 +136,35 @@ export function UploadModal() {
                 onChange={handleFileInputChange}
               />
 
-              {/* Small Decorative Floating Elements (Section 14: video, audio, document, sparkle) */}
-              <motion.div
-                animate={{ y: [0, -4, 0] }}
-                transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute top-3 left-4 p-2 rounded-xl bg-white shadow-2xs border border-[#635BFF]/15 text-[#635BFF] opacity-75"
-              >
-                <Film className="w-3.5 h-3.5" />
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [0, 4, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute bottom-3 left-6 p-2 rounded-xl bg-white shadow-2xs border border-[#EC4899]/15 text-[#EC4899] opacity-75"
-              >
-                <FileAudio className="w-3.5 h-3.5" />
-              </motion.div>
-
-              <motion.div
-                animate={{ y: [0, -5, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute top-4 right-5 p-2 rounded-xl bg-white shadow-2xs border border-[#06B6D4]/15 text-[#06B6D4] opacity-75"
-              >
-                <FileText className="w-3.5 h-3.5" />
-              </motion.div>
-
-              <motion.div
-                animate={{ scale: [1, 1.15, 1] }}
-                transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute bottom-4 right-6 p-1.5 rounded-lg bg-white shadow-2xs text-[#F59E0B] opacity-80"
-              >
-                <Sparkles className="w-3.5 h-3.5" />
-              </motion.div>
-
-              <div className="flex flex-col items-center relative z-10">
-                {/* Central Upload Icon with Animated Gradient Halo */}
-                <div className="relative mb-3.5">
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-[#635BFF] to-[#EC4899] blur-md opacity-35 animate-pulse" />
-                  <div
-                    className={`relative w-16 h-16 rounded-2xl flex items-center justify-center transition-colors border shadow-xs ${
-                      selectedFile
-                        ? 'bg-[#22C55E]/10 border-[#22C55E]/30 text-[#22C55E]'
-                        : 'bg-white border-[#635BFF]/25 text-[#635BFF]'
-                    }`}
-                  >
-                    {selectedFile ? (
-                      <Check className="w-7 h-7" />
-                    ) : (
-                      <UploadCloud className="w-8 h-8" />
-                    )}
-                  </div>
+              <div className="flex flex-col items-center">
+                <div
+                  className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-3.5 transition-colors ${
+                    selectedFile
+                      ? 'bg-[#22C55E]/10 text-[#22C55E]'
+                      : 'bg-[#635BFF]/10 text-[#635BFF]'
+                  }`}
+                >
+                  {selectedFile ? (
+                    <Check className="w-6 h-6" />
+                  ) : (
+                    <UploadCloud className="w-7 h-7" />
+                  )}
                 </div>
 
                 {selectedFile ? (
                   <div>
-                    <p className="text-sm font-bold text-[#17172A]">{selectedFile.name}</p>
+                    <p className="text-sm font-semibold text-[#17172A]">{selectedFile.name}</p>
                     <p className="text-xs text-[#68697A] mt-0.5">
                       {(selectedFile.size / (1024 * 1024)).toFixed(2)} MB • Ready to analyze
                     </p>
                   </div>
                 ) : (
                   <div>
-                    <p className="text-sm font-bold text-[#17172A]">
+                    <p className="text-sm font-semibold text-[#17172A]">
                       Drag & drop video, audio, image or script
                     </p>
                     <p className="text-xs text-[#68697A] mt-1">
-                      or <span className="text-[#635BFF] font-semibold underline">browse files</span> from your computer
+                      or <span className="text-[#635BFF] font-medium underline">browse files</span> from your computer
                     </p>
                   </div>
                 )}
@@ -226,7 +174,7 @@ export function UploadModal() {
                   {['MP4', 'MOV', 'WEBM', 'MP3', 'WAV', 'PNG', 'JPG', 'PDF', 'TXT'].map((fmt) => (
                     <span
                       key={fmt}
-                      className="px-2 py-0.5 text-[10px] font-semibold rounded-md bg-white border border-[rgba(20,20,50,0.08)] text-[#68697A] shadow-2xs"
+                      className="px-2 py-0.5 text-[10px] font-medium rounded-md bg-[rgba(20,20,40,0.04)] text-[#68697A]"
                     >
                       {fmt}
                     </span>
@@ -245,7 +193,7 @@ export function UploadModal() {
                 <div className="w-full h-2 bg-[#F0F1F6] rounded-full overflow-hidden">
                   <motion.div
                     animate={{ width: `${uploadProgress}%` }}
-                    className="h-full bg-gradient-to-r from-[#635BFF] to-[#EC4899]"
+                    className="h-full bg-gradient-to-r from-[#635BFF] to-[#8B5CF6]"
                   />
                 </div>
               </div>
@@ -254,14 +202,14 @@ export function UploadModal() {
             {/* Hackathon Demo Preset Option */}
             <div className="pt-2 border-t border-[rgba(20,20,40,0.06)] flex items-center justify-between">
               <div className="text-left">
-                <span className="text-xs font-bold text-[#17172A]">Live Hackathon Demo?</span>
+                <span className="text-xs font-semibold text-[#17172A]">Live Hackathon Demo?</span>
                 <p className="text-[11px] text-[#68697A]">Use pre-configured 4K keynote recording</p>
               </div>
               <button
                 type="button"
                 onClick={handleSelectSample}
                 disabled={isUploading}
-                className="px-3.5 py-1.5 rounded-xl border border-[rgba(20,20,40,0.12)] bg-white text-xs font-semibold text-[#17172A] hover:bg-[#FAFAF7] hover:border-[#635BFF]/30 transition-all flex items-center gap-1.5 shadow-2xs"
+                className="px-3.5 py-1.5 rounded-xl border border-[rgba(20,20,40,0.12)] text-xs font-medium text-[#17172A] hover:bg-[#FAFAF7] hover:border-[#635BFF]/30 transition-all flex items-center gap-1.5"
               >
                 <span>Load Sample Video</span>
                 <ArrowRight className="w-3 h-3 text-[#635BFF]" />
@@ -270,7 +218,7 @@ export function UploadModal() {
           </div>
 
           {/* Footer Action */}
-          <div className="px-6 py-4 border-t border-[rgba(20,20,40,0.06)] bg-[#FAFAF8] flex items-center justify-between relative z-10">
+          <div className="px-6 py-4 border-t border-[rgba(20,20,40,0.06)] bg-[#FAFAF7] flex items-center justify-between">
             <span className="text-xs text-[#68697A]">
               Max file size: 2 GB • Encrypted storage
             </span>
@@ -279,7 +227,7 @@ export function UploadModal() {
                 type="button"
                 onClick={() => setIsUploadModalOpen(false)}
                 disabled={isUploading}
-                className="px-4 py-2 rounded-xl text-xs font-semibold text-[#68697A] hover:text-[#17172A] hover:bg-black/5 transition-colors"
+                className="px-4 py-2 rounded-xl text-xs font-medium text-[#68697A] hover:text-[#17172A] hover:bg-black/5 transition-colors"
               >
                 Cancel
               </button>
@@ -287,7 +235,7 @@ export function UploadModal() {
                 type="button"
                 onClick={handleStartUpload}
                 disabled={!selectedFile || isUploading}
-                className={`px-5 py-2.5 rounded-xl text-xs font-semibold ${
+                className={`px-5 py-2 rounded-xl text-xs font-medium ${
                   selectedFile && !isUploading
                     ? 'btn-primary-gradient'
                     : 'bg-[#E5E7EB] text-[#9CA3AF] cursor-not-allowed'

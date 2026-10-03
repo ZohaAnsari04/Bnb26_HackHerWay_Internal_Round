@@ -176,9 +176,9 @@ export default function StudioPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           {/* Left Column: Video Preview, Timeline & Controls (7 Cols) */}
           <div className="lg:col-span-7 space-y-4">
-            <div className="card-clean card-premium p-4 overflow-hidden">
+            <div className="card-clean p-4 overflow-hidden">
               {/* Video Player */}
-              <div className="relative aspect-video rounded-xl bg-black overflow-hidden group flex items-center justify-center shadow-inner">
+              <div className="relative aspect-video rounded-xl bg-black overflow-hidden group flex items-center justify-center">
                 <video
                   ref={videoRef}
                   src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
@@ -189,7 +189,7 @@ export default function StudioPage() {
 
                 {/* Subtitle Caption Overlay synced to speech */}
                 <div className="absolute bottom-6 left-6 right-6 text-center pointer-events-none">
-                  <span className="inline-block px-4 py-2 rounded-xl bg-black/85 backdrop-blur-md text-white text-sm font-bold shadow-xl border border-white/10">
+                  <span className="inline-block px-4 py-2 rounded-xl bg-black/80 backdrop-blur-md text-white text-sm font-bold shadow-lg">
                     {currentTime >= 23 && currentTime <= 68
                       ? "The biggest mistake developers make with AI is treating it as an autocomplete..."
                       : currentTime >= 69 && currentTime <= 114
@@ -201,12 +201,12 @@ export default function StudioPage() {
                 {/* Hover Play/Pause Overlay */}
                 <button
                   onClick={togglePlay}
-                  className="absolute w-14 h-14 rounded-full bg-white/95 text-[#17172A] flex items-center justify-center shadow-[0_8px_30px_rgba(0,0,0,0.35)] group-hover:scale-110 group-hover:bg-[#635BFF] group-hover:text-white transition-all"
+                  className="absolute w-14 h-14 rounded-full bg-white/90 text-[#17172A] flex items-center justify-center shadow-lg group-hover:scale-105 transition-all"
                 >
                   {isPlaying ? (
-                    <Pause className="w-6 h-6 fill-current" />
+                    <Pause className="w-6 h-6 fill-[#17172A]" />
                   ) : (
-                    <Play className="w-6 h-6 fill-current ml-1" />
+                    <Play className="w-6 h-6 fill-[#17172A] ml-1" />
                   )}
                 </button>
               </div>
@@ -230,7 +230,7 @@ export default function StudioPage() {
                       <div
                         key={opp.id}
                         title={`Opportunity: ${opp.hookText} (${opp.score} Score)`}
-                        className="absolute h-full rounded-sm bg-[#635BFF]/35 hover:bg-[#635BFF]/70 transition-colors z-10"
+                        className="absolute h-full rounded-sm bg-[#635BFF]/30 hover:bg-[#635BFF]/60 transition-colors z-10"
                         style={{ left: `${startPct}%`, width: `${widthPct}%` }}
                       />
                     );
@@ -238,7 +238,7 @@ export default function StudioPage() {
 
                   {/* Playback progress */}
                   <div
-                    className="h-full bg-gradient-to-r from-[#635BFF] via-[#8B5CF6] to-[#EC4899] rounded-full relative z-20"
+                    className="h-full bg-gradient-to-r from-[#635BFF] to-[#EC4899] rounded-full relative z-20"
                     style={{ width: `${(currentTime / duration) * 100}%` }}
                   >
                     <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3.5 h-3.5 rounded-full bg-white shadow-md border-2 border-[#635BFF]" />
@@ -278,7 +278,7 @@ export default function StudioPage() {
                     >
                       {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
                     </button>
-                    <span className="text-[11px] font-medium px-2 py-0.5 rounded-lg bg-[#F7F8FC] border border-[rgba(20,20,40,0.06)]">
+                    <span className="text-[11px] font-medium px-2 py-0.5 rounded bg-[#F7F8FC] border border-[rgba(20,20,40,0.06)]">
                       1080p 60fps
                     </span>
                   </div>
@@ -287,7 +287,7 @@ export default function StudioPage() {
             </div>
 
             {/* Quick Clip Marker Bar */}
-            <div className="card-clean card-premium p-4 flex items-center justify-between">
+            <div className="p-4 rounded-2xl bg-white border border-[rgba(20,20,40,0.07)] shadow-xs flex items-center justify-between">
               <div>
                 <span className="text-xs font-bold text-[#17172A]">Timeline Jump Points</span>
                 <p className="text-[11px] text-[#68697A]">Click any moment to immediately preview and listen</p>
@@ -297,7 +297,7 @@ export default function StudioPage() {
                   <button
                     key={opp.id}
                     onClick={() => seekTo(opp.startTime)}
-                    className="px-2.5 py-1 text-xs rounded-xl border border-[rgba(20,20,40,0.1)] hover:border-[#635BFF] hover:bg-[#635BFF]/5 font-medium transition-all"
+                    className="px-2.5 py-1 text-xs rounded-lg border border-[rgba(20,20,40,0.1)] hover:border-[#635BFF] hover:bg-[#635BFF]/5 font-medium transition-all"
                   >
                     Moment {idx + 1} ({opp.startFormatted})
                   </button>
@@ -311,32 +311,31 @@ export default function StudioPage() {
             {activeTab === 'opportunities' && (
               <>
                 {/* Content Summary Card (Section 12) */}
-                <div className="card-clean card-premium surface-radial-purple card-top-edge p-6 space-y-4">
+                <div className="card-clean p-6 space-y-4">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold uppercase tracking-wider text-[#635BFF] flex items-center gap-1.5">
-                      <Sparkles className="w-3.5 h-3.5 text-[#EC4899]" />
+                      <Sparkles className="w-3.5 h-3.5" />
                       <span>Content Summary</span>
                     </span>
-                    <span className="badge-soft-green text-[11px] font-semibold px-2.5 py-0.5 rounded-full flex items-center gap-1">
-                      <CheckCircle2 className="w-3 h-3 text-[#22C55E]" />
+                    <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-[#22C55E]/10 text-[#22C55E] border border-[#22C55E]/20">
                       High Resonance
                     </span>
                   </div>
 
                   <div className="grid grid-cols-3 gap-2.5 text-xs">
-                    <div className="p-3 rounded-2xl bg-white/80 border border-[rgba(20,20,40,0.06)] shadow-2xs hover:border-[#635BFF]/20 transition-colors">
+                    <div className="p-3 rounded-2xl bg-[#FAFAF7] border border-[rgba(20,20,40,0.06)] hover:border-[#635BFF]/20 transition-colors">
                       <span className="text-[10px] text-[#68697A] block font-semibold uppercase tracking-wider">Topic</span>
                       <span className="font-bold text-[#17172A] mt-1 block truncate">
                         {activeProject?.topics[0] || 'AI Development'}
                       </span>
                     </div>
-                    <div className="p-3 rounded-2xl bg-white/80 border border-[rgba(20,20,40,0.06)] shadow-2xs hover:border-[#635BFF]/20 transition-colors">
+                    <div className="p-3 rounded-2xl bg-[#FAFAF7] border border-[rgba(20,20,40,0.06)] hover:border-[#635BFF]/20 transition-colors">
                       <span className="text-[10px] text-[#68697A] block font-semibold uppercase tracking-wider">Tone</span>
                       <span className="font-bold text-[#17172A] mt-1 block truncate">
                         {activeProject?.tone || 'Educational'}
                       </span>
                     </div>
-                    <div className="p-3 rounded-2xl bg-white/80 border border-[rgba(20,20,40,0.06)] shadow-2xs hover:border-[#635BFF]/20 transition-colors">
+                    <div className="p-3 rounded-2xl bg-[#FAFAF7] border border-[rgba(20,20,40,0.06)] hover:border-[#635BFF]/20 transition-colors">
                       <span className="text-[10px] text-[#68697A] block font-semibold uppercase tracking-wider">Audience</span>
                       <span className="font-bold text-[#17172A] mt-1 block truncate">
                         {activeProject?.targetAudience || 'Developers'}
@@ -352,7 +351,7 @@ export default function StudioPage() {
                       {(activeProject?.keyThemes || ['AI', 'Productivity', 'Software Engineering']).map((theme) => (
                         <span
                           key={theme}
-                          className="px-3 py-1 text-xs font-semibold rounded-xl bg-white border border-[rgba(20,20,40,0.08)] text-[#17172A] shadow-2xs hover:border-[#635BFF]/30 transition-colors"
+                          className="px-3 py-1 text-xs font-semibold rounded-xl bg-[#F7F8FC] border border-[rgba(20,20,40,0.08)] text-[#17172A] shadow-2xs hover:border-[#635BFF]/30 transition-colors"
                         >
                           {theme}
                         </span>
@@ -378,11 +377,8 @@ export default function StudioPage() {
                       key={opp.id}
                       whileHover={{ y: -2 }}
                       transition={{ duration: 0.15 }}
-                      className="card-clean card-premium card-sweep p-5 space-y-4 hover:border-[rgba(99,91,255,0.26)] transition-all"
+                      className="card-clean p-5 space-y-4 hover:border-[#635BFF]/30 transition-all"
                     >
-                      {/* Top accent line */}
-                      <div className="card-top-edge" />
-
                       {/* Top Score & Time */}
                       <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0">
@@ -417,7 +413,7 @@ export default function StudioPage() {
                       </div>
 
                       {/* "Why This Works" Section (Prompt Section 12: VERY IMPORTANT) */}
-                      <div className="p-3.5 rounded-xl bg-[#FAFAF8] border border-[rgba(20,20,40,0.06)] space-y-2">
+                      <div className="p-3.5 rounded-xl bg-[#FAFAF7] border border-[rgba(20,20,40,0.06)] space-y-2">
                         <span className="text-[11px] font-bold uppercase tracking-wider text-[#17172A] flex items-center gap-1.5">
                           <Check className="w-3.5 h-3.5 text-[#22C55E]" />
                           <span>Why this works:</span>

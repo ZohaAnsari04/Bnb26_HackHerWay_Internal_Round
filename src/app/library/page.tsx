@@ -126,9 +126,9 @@ export default function LibraryPage() {
 
         {/* Assets Grid */}
         {filteredAssets.length === 0 ? (
-          <div className="card-clean card-premium surface-radial-purple card-top-edge p-12 text-center">
-            <div className="icon-box-purple mx-auto flex items-center justify-center mb-3">
-              <Film className="w-6 h-6 text-[#635BFF]" />
+          <div className="card-clean p-12 text-center">
+            <div className="w-12 h-12 rounded-2xl bg-[#635BFF]/10 text-[#635BFF] mx-auto flex items-center justify-center mb-3">
+              <Film className="w-6 h-6" />
             </div>
             <h3 className="text-base font-bold text-[#17172A]">No assets found</h3>
             <p className="text-xs text-[#68697A] mt-1 max-w-sm mx-auto">
@@ -148,11 +148,8 @@ export default function LibraryPage() {
                 key={asset.id}
                 whileHover={{ y: -3 }}
                 transition={{ duration: 0.2 }}
-                className="card-clean card-premium card-sweep overflow-hidden group flex flex-col justify-between hover:border-[rgba(99,91,255,0.24)]"
+                className="card-clean overflow-hidden group flex flex-col justify-between"
               >
-                {/* Top edge gradient accent on video assets */}
-                {asset.type === 'video' && <div className="card-top-edge" />}
-
                 {/* Media Preview Box */}
                 <div className="relative aspect-video bg-[#17172A] overflow-hidden">
                   {asset.thumbnailUrl ? (
@@ -168,12 +165,9 @@ export default function LibraryPage() {
                     </div>
                   )}
 
-                  {/* Gradient shadow overlay at bottom */}
-                  <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/70 to-transparent pointer-events-none" />
-
                   {/* Duration Pill */}
                   {asset.durationFormatted && (
-                    <span className="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-md bg-black/85 text-white text-[10px] font-mono font-medium backdrop-blur-xs border border-white/10 shadow-xs">
+                    <span className="absolute bottom-2.5 right-2.5 px-2 py-0.5 rounded-md bg-black/80 text-white text-[10px] font-mono font-medium">
                       {asset.durationFormatted}
                     </span>
                   )}
@@ -181,15 +175,15 @@ export default function LibraryPage() {
                   {/* Play Button Overlay on Hover */}
                   <Link
                     href="/studio"
-                    className="absolute inset-0 bg-black/35 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
+                    className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center"
                   >
-                    <div className="w-12 h-12 rounded-full bg-white/95 text-[#17172A] flex items-center justify-center shadow-[0_6px_25px_rgba(0,0,0,0.3)] group-hover:scale-110 group-hover:bg-[#635BFF] group-hover:text-white transition-all">
-                      <Play className="w-5 h-5 fill-current ml-0.5" />
+                    <div className="w-12 h-12 rounded-full bg-white text-[#17172A] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                      <Play className="w-5 h-5 fill-[#17172A] ml-0.5" />
                     </div>
                   </Link>
 
                   {/* AI Analyzed Badge */}
-                  <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md border border-[rgba(34,197,94,0.2)] shadow-xs">
+                  <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/95 backdrop-blur-md border border-[rgba(20,20,40,0.08)] shadow-xs">
                     <CheckCircle2 className="w-3 h-3 text-[#22C55E]" />
                     <span className="text-[10px] font-bold text-[#17172A]">AI Analyzed</span>
                   </div>
@@ -204,7 +198,7 @@ export default function LibraryPage() {
                       </h3>
                       <button
                         onClick={() => showToast(`Actions for ${asset.name}`)}
-                        className="text-[#9496A8] hover:text-[#17172A] p-0.5 rounded transition-colors"
+                        className="text-[#9496A8] hover:text-[#17172A] p-0.5 rounded"
                       >
                         <MoreVertical className="w-4 h-4" />
                       </button>
@@ -215,7 +209,7 @@ export default function LibraryPage() {
                       {asset.topics.map((t) => (
                         <span
                           key={t}
-                          className="badge-soft-purple text-[10px] font-medium px-2 py-0.5 rounded-md"
+                          className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-[#F7F8FC] border border-[rgba(20,20,40,0.06)] text-[#635BFF]"
                         >
                           #{t}
                         </span>
@@ -232,9 +226,9 @@ export default function LibraryPage() {
 
                     <Link
                       href="/studio"
-                      className="text-xs font-semibold text-[#635BFF] hover:text-[#4F46E5] flex items-center gap-1 transition-colors"
+                      className="text-xs font-semibold text-[#635BFF] hover:underline flex items-center gap-1"
                     >
-                      <Sparkles className="w-3 h-3 text-[#EC4899]" />
+                      <Sparkles className="w-3 h-3" />
                       <span>Open in Studio</span>
                     </Link>
                   </div>

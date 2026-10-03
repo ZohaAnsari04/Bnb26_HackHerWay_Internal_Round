@@ -218,35 +218,16 @@ export function Sidebar() {
       {/* Bottom Navigation & Workflow Status */}
       <div className="p-3 border-t border-[rgba(20,20,40,0.06)] space-y-2">
         {!collapsed && (
-          <div className="space-y-2 mb-2">
-            {/* Storage Quota Card (Section 20) */}
-            <div className="p-3 rounded-2xl bg-white border border-[rgba(99,91,255,0.08)] shadow-[0_2px_8px_rgba(20,20,50,0.03)]">
-              <div className="flex items-center justify-between text-[11px] mb-1.5">
-                <span className="text-[#68697A] font-semibold flex items-center gap-1.5">
-                  <Flame className="w-3.5 h-3.5 text-[#EC4899]" />
-                  <span>Clip Quota</span>
-                </span>
-                <span className="font-bold text-[#17172A]">87 / 150</span>
-              </div>
-              <div className="w-full h-1.5 bg-[#F0F1F6] rounded-full overflow-hidden">
-                <div className="w-[58%] h-full bg-gradient-to-r from-[#635BFF] via-[#8B5CF6] to-[#EC4899] rounded-full" />
-              </div>
+          <div className="p-3 rounded-xl bg-[#F7F8FC] border border-[rgba(20,20,40,0.06)] mb-2">
+            <div className="flex items-center justify-between text-[11px] mb-1">
+              <span className="text-[#68697A] font-medium flex items-center gap-1">
+                <Flame className="w-3 h-3 text-[#EC4899]" />
+                <span>Monthly Quota</span>
+              </span>
+              <span className="font-bold text-[#17172A]">87 / 150 clips</span>
             </div>
-
-            {/* Upgrade to Pro Card (Section 20) */}
-            <div className="p-3.5 rounded-2xl bg-gradient-to-br from-[#F8F7FF] via-[#FFF5F9] to-white border border-[#635BFF]/15 shadow-xs relative overflow-hidden group">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-xs font-bold text-[#17172A] tracking-tight">Creator Pro</span>
-                  <Sparkles className="w-3 h-3 text-[#EC4899] animate-pulse" />
-                </div>
-                <span className="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded bg-[#635BFF]/10 text-[#635BFF]">
-                  AI Max
-                </span>
-              </div>
-              <p className="text-[10px] text-[#68697A] mt-1 leading-snug">
-                Unlimited 4K vertical rendering and Whisper large-v3 speech.
-              </p>
+            <div className="w-full h-1.5 bg-[#E6E8F0] rounded-full overflow-hidden">
+              <div className="w-[58%] h-full bg-gradient-to-r from-[#635BFF] to-[#EC4899] rounded-full" />
             </div>
           </div>
         )}

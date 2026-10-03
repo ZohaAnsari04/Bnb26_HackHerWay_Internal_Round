@@ -45,18 +45,15 @@ export function ScheduleModal() {
         />
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.96, y: 12 }}
+          initial={{ opacity: 0, scale: 0.95, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.96, y: 12 }}
-          className="relative w-full max-w-lg bg-white rounded-3xl shadow-[0_25px_70px_rgba(20,20,50,0.22)] border border-[rgba(20,20,40,0.08)] overflow-hidden z-10"
+          exit={{ opacity: 0, scale: 0.95, y: 10 }}
+          className="relative w-full max-w-lg bg-white rounded-2xl shadow-[0_25px_70px_rgba(20,20,50,0.18)] border border-[rgba(20,20,40,0.08)] overflow-hidden z-10"
         >
-          {/* Top gradient edge */}
-          <div className="card-top-edge" />
-
-          <div className="px-6 py-5 border-b border-[rgba(20,20,40,0.06)] flex items-center justify-between bg-gradient-to-r from-[#FAFAF7] to-white">
-            <div className="flex items-center gap-3">
-              <div className="icon-box-purple">
-                <CalendarIcon className="w-5 h-5 text-[#635BFF]" />
+          <div className="px-6 py-5 border-b border-[rgba(20,20,40,0.06)] flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg bg-[#635BFF]/10 text-[#635BFF] flex items-center justify-center">
+                <CalendarIcon className="w-4 h-4" />
               </div>
               <div>
                 <h3 className="text-base font-semibold text-[#17172A]">Schedule Publication</h3>
@@ -65,7 +62,7 @@ export function ScheduleModal() {
             </div>
             <button
               onClick={closeScheduleModal}
-              className="p-1.5 rounded-xl text-[#68697A] hover:text-[#17172A] hover:bg-black/5 transition-colors"
+              className="p-1.5 rounded-lg text-[#68697A] hover:text-[#17172A] hover:bg-black/5"
             >
               <X className="w-4 h-4" />
             </button>

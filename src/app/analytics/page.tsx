@@ -52,57 +52,40 @@ export default function AnalyticsPage() {
 
         {/* 4 Core Metrics (Prompt Section 20: Views, Engagement, Average Watch Time, Completion Rate) */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {metrics.map((metric, idx) => {
-            const radials = ['surface-radial-purple', 'surface-radial-pink', 'surface-radial-cyan', 'surface-radial-green'];
-            const icons = [Eye, TrendingUp, Clock, CheckCircle2];
-            const iconBgs = ['icon-box-purple', 'icon-box-pink', 'icon-box-cyan', 'icon-box-green'];
-            const iconColors = ['text-[#635BFF]', 'text-[#EC4899]', 'text-[#06B6D4]', 'text-[#22C55E]'];
-            const Icon = icons[idx % icons.length];
-
-            return (
-              <motion.div
-                key={metric.label}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: idx * 0.05 }}
-                className={`card-clean card-premium card-sweep ${radials[idx % radials.length]} p-5 relative overflow-hidden`}
-              >
-                {/* Thin top accent */}
-                <div className="card-top-edge" />
-
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-semibold text-[#68697A]">{metric.label}</span>
-                  <div className={`${iconBgs[idx % iconBgs.length]} !w-8 !h-8 !rounded-xl`}>
-                    <Icon className={`w-4 h-4 ${iconColors[idx % iconColors.length]}`} />
-                  </div>
-                </div>
-
-                <div className="mt-1 flex items-baseline gap-2">
-                  <span className="text-2xl font-bold text-[#17172A] tracking-tight">{metric.value}</span>
-                  <span className="text-xs font-semibold text-[#22C55E] flex items-center bg-[#22C55E]/10 px-1.5 py-0.5 rounded-md">
-                    <TrendingUp className="w-3 h-3 mr-0.5 inline" />
-                    {metric.change}
-                  </span>
-                </div>
-                <p className="text-[11px] text-[#9496A8] mt-1.5">{metric.subtext}</p>
-              </motion.div>
-            );
-          })}
+          {metrics.map((metric, idx) => (
+            <motion.div
+              key={metric.label}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: idx * 0.05 }}
+              className="card-clean p-5"
+            >
+              <span className="text-xs font-medium text-[#68697A]">{metric.label}</span>
+              <div className="mt-2 flex items-baseline gap-2">
+                <span className="text-2xl font-bold text-[#17172A] tracking-tight">{metric.value}</span>
+                <span className="text-xs font-semibold text-[#22C55E] flex items-center">
+                  <TrendingUp className="w-3 h-3 mr-0.5 inline" />
+                  {metric.change}
+                </span>
+              </div>
+              <p className="text-[11px] text-[#9496A8] mt-1">{metric.subtext}</p>
+            </motion.div>
+          ))}
         </div>
 
         {/* AI INSIGHTS CALLOUT (Prompt Section 20: VERY IMPORTANT) */}
-        <div className="card-clean card-premium surface-radial-purple card-top-edge p-6 space-y-4">
+        <div className="p-6 rounded-3xl bg-gradient-to-r from-[#F7F8FC] via-white to-[#FAFAF7] border border-[rgba(20,20,40,0.08)] shadow-xs space-y-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2.5">
-              <div className="icon-box-purple">
-                <Sparkles className="w-5 h-5 text-[#635BFF]" />
+            <div className="flex items-center gap-2">
+              <div className="w-7 h-7 rounded-xl bg-[#635BFF]/10 text-[#635BFF] flex items-center justify-center">
+                <Sparkles className="w-4 h-4" />
               </div>
               <div>
                 <h3 className="text-sm font-bold text-[#17172A]">CreatorAI Algorithmic Insights</h3>
                 <p className="text-xs text-[#68697A]">Automated pattern detection from 143 syndicated videos</p>
               </div>
             </div>
-            <span className="badge-soft-purple text-[11px] font-bold px-3 py-1 rounded-full">
+            <span className="text-[11px] font-semibold text-[#635BFF] bg-[#635BFF]/10 px-2.5 py-1 rounded-full">
               3 High-Confidence Findings
             </span>
           </div>
@@ -111,14 +94,14 @@ export default function AnalyticsPage() {
             {aiInsights.map((insight) => (
               <div
                 key={insight.id}
-                className="p-4 rounded-2xl bg-white/90 border border-[rgba(20,20,40,0.07)] shadow-2xs flex flex-col justify-between hover:border-[#635BFF]/30 hover:shadow-md transition-all"
+                className="p-4 rounded-2xl bg-white border border-[rgba(20,20,40,0.07)] shadow-xs flex flex-col justify-between hover:border-[#635BFF]/30 transition-all"
               >
                 <div>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-[#635BFF]">
                       {insight.title}
                     </span>
-                    <span className="badge-soft-green text-[10px] font-bold px-2 py-0.5 rounded-full">
+                    <span className="text-[11px] font-bold text-[#22C55E]">
                       {insight.metricBadge}
                     </span>
                   </div>
@@ -130,7 +113,7 @@ export default function AnalyticsPage() {
                 <div className="mt-4 pt-3 border-t border-[rgba(20,20,40,0.05)] flex items-center justify-between">
                   <button
                     onClick={() => showToast(`Applied recommendation: ${insight.actionText}`)}
-                    className="text-xs font-semibold text-[#635BFF] hover:text-[#4F46E5] flex items-center gap-1 transition-colors"
+                    className="text-xs font-semibold text-[#635BFF] hover:underline flex items-center gap-1"
                   >
                     <span>{insight.actionText}</span>
                     <ArrowRight className="w-3 h-3" />
@@ -144,13 +127,13 @@ export default function AnalyticsPage() {
         {/* 2-Column Analytics Charts */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
           {/* Views Over Time Chart (7 cols) */}
-          <div className="lg:col-span-7 card-clean card-premium p-6 space-y-4">
+          <div className="lg:col-span-7 card-clean p-6 space-y-4">
             <div className="flex items-center justify-between pb-2 border-b border-[rgba(20,20,40,0.06)]">
               <div>
                 <h3 className="text-sm font-bold text-[#17172A]">Views Over Time</h3>
                 <p className="text-xs text-[#68697A]">Daily audience reach and volume</p>
               </div>
-              <span className="badge-soft-purple text-xs font-bold px-2.5 py-0.5 rounded-full">428.5K Total</span>
+              <span className="text-xs font-bold text-[#635BFF]">428.5K Total</span>
             </div>
 
             {/* Custom SVG Bar Chart */}
@@ -178,7 +161,7 @@ export default function AnalyticsPage() {
           </div>
 
           {/* Engagement By Platform (5 cols) */}
-          <div className="lg:col-span-5 card-clean card-premium p-6 space-y-4">
+          <div className="lg:col-span-5 card-clean p-6 space-y-4">
             <div className="pb-2 border-b border-[rgba(20,20,40,0.06)]">
               <h3 className="text-sm font-bold text-[#17172A]">Platform Distribution</h3>
               <p className="text-xs text-[#68697A]">Syndicated share across channels</p>
@@ -191,12 +174,12 @@ export default function AnalyticsPage() {
                     <span className="font-semibold text-[#17172A]">{item.platform}</span>
                     <span className="font-bold text-[#68697A]">{item.views} ({item.percentage}%)</span>
                   </div>
-                  <div className="w-full h-2.5 bg-[#F0F1F6] rounded-full overflow-hidden">
+                  <div className="w-full h-2 bg-[#F0F1F6] rounded-full overflow-hidden">
                     <motion.div
                       initial={{ width: 0 }}
                       animate={{ width: `${item.percentage}%` }}
                       transition={{ duration: 0.8 }}
-                      className="h-full rounded-full shadow-xs"
+                      className="h-full rounded-full"
                       style={{ backgroundColor: item.color }}
                     />
                   </div>
@@ -209,7 +192,7 @@ export default function AnalyticsPage() {
         {/* Top Topics & Best Performing Hooks (Prompt Section 20) */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Top Topics */}
-          <div className="card-clean card-premium p-6 space-y-4">
+          <div className="card-clean p-6 space-y-4">
             <div className="pb-2 border-b border-[rgba(20,20,40,0.06)]">
               <h3 className="text-sm font-bold text-[#17172A]">Top Performing Topics</h3>
               <p className="text-xs text-[#68697A]">Highest engagement by theme</p>
@@ -219,7 +202,7 @@ export default function AnalyticsPage() {
               {topTopics.map((top, idx) => (
                 <div
                   key={top.topic}
-                  className="p-3.5 rounded-xl bg-white/80 border border-[rgba(20,20,40,0.06)] shadow-2xs hover:border-[#635BFF]/30 hover:bg-[#F9FAFE] transition-all flex items-center justify-between"
+                  className="p-3.5 rounded-xl bg-[#FAFAF7] border border-[rgba(20,20,40,0.05)] flex items-center justify-between"
                 >
                   <div className="flex items-center gap-3">
                     <span className="text-xs font-mono font-bold text-[#635BFF]">{idx + 1}</span>
@@ -228,7 +211,7 @@ export default function AnalyticsPage() {
                       <span className="text-[11px] text-[#68697A]">{top.count} clips produced</span>
                     </div>
                   </div>
-                  <span className="badge-soft-green text-xs font-bold px-2.5 py-0.5 rounded-full">
+                  <span className="text-xs font-bold text-[#22C55E] bg-[#22C55E]/10 px-2 py-0.5 rounded-md">
                     {top.engagement} Avg Eng.
                   </span>
                 </div>
@@ -237,7 +220,7 @@ export default function AnalyticsPage() {
           </div>
 
           {/* Best Performing Hooks */}
-          <div className="card-clean card-premium p-6 space-y-4">
+          <div className="card-clean p-6 space-y-4">
             <div className="pb-2 border-b border-[rgba(20,20,40,0.06)]">
               <h3 className="text-sm font-bold text-[#17172A]">Best Performing Hooks</h3>
               <p className="text-xs text-[#68697A]">Retention leaders in first 3 seconds</p>
@@ -247,7 +230,7 @@ export default function AnalyticsPage() {
               {bestPerformingHooks.map((h) => (
                 <div
                   key={h.hook}
-                  className="p-3.5 rounded-xl bg-white/80 border border-[rgba(20,20,40,0.06)] shadow-2xs hover:border-[#635BFF]/30 hover:bg-[#F9FAFE] transition-all flex items-center justify-between gap-3"
+                  className="p-3.5 rounded-xl bg-[#FAFAF7] border border-[rgba(20,20,40,0.05)] flex items-center justify-between gap-3"
                 >
                   <div className="min-w-0">
                     <p className="text-xs font-bold text-[#17172A] truncate">
@@ -257,7 +240,7 @@ export default function AnalyticsPage() {
                       Hook Score: {h.score}/100
                     </span>
                   </div>
-                  <span className="badge-soft-purple text-xs font-bold px-2.5 py-0.5 rounded-full shrink-0">
+                  <span className="text-xs font-bold text-[#635BFF] bg-[#635BFF]/10 px-2 py-0.5 rounded-md shrink-0">
                     {h.retention} Retention
                   </span>
                 </div>
