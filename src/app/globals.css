@@ -28,19 +28,34 @@
   --gradient-primary: linear-gradient(135deg, #635BFF 0%, #8B5CF6 50%, #EC4899 100%);
   --gradient-ai: linear-gradient(135deg, #06B6D4 0%, #635BFF 100%);
   --gradient-soft: linear-gradient(180deg, rgba(247, 248, 252, 0.7) 0%, rgba(250, 250, 247, 0.9) 100%);
+
+  /* Typography Families */
+  --font-serif-heading: Georgia, 'Times New Roman', Times, serif;
+  --font-body: var(--font-montserrat), 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
 /* Force light theme across entire app - never allow dark mode override */
 html, body {
   background-color: var(--bg-main);
   color: var(--text-primary);
-  font-family: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-family: var(--font-body);
   min-height: 100vh;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings strict Georgia typography */
+h1, h2, h3, h4, h5, h6, .font-heading, .heading-georgia {
+  font-family: var(--font-serif-heading) !important;
+  letter-spacing: -0.015em;
+}
+
+/* General text elements fallback to Montserrat */
+p, span, div, a, button, input, textarea, select, label, table, nav {
+  font-family: inherit;
 }
 
 /* Custom scrollbars */
