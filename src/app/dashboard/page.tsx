@@ -28,7 +28,8 @@ import {
   Check,
   Radio,
   FileText,
-  FileAudio
+  FileAudio,
+  FolderKanban
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
