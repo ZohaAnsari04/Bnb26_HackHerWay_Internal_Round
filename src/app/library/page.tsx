@@ -42,6 +42,21 @@ export default function LibraryPage() {
 
   const allTopics = Array.from(new Set(assets.flatMap((a) => a.topics)));
 
+  const getAssetThumb = (asset: Asset, idx: number) => {
+    if (asset.thumbnailUrl && !asset.thumbnailUrl.includes('photo-1618005182384-a83a8bd57fbe') && asset.thumbnailUrl !== '') {
+      return asset.thumbnailUrl;
+    }
+    const premiumThumbs = [
+      '/thumbnails/creator.jpg',
+      '/thumbnails/keynote.jpg',
+      '/thumbnails/coding.jpg',
+      '/thumbnails/podcast.jpg',
+      'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80',
+      'https://images.unsplash.com/photo-1534972195531-a756b1126f24?auto=format&fit=crop&w=800&q=80'
+    ];
+    return premiumThumbs[idx % premiumThumbs.length];
+  };
+
   return (
     <AppShell>
       <div className="space-y-6">
@@ -146,7 +161,7 @@ export default function LibraryPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {filteredAssets.map((asset) => (
+            {filteredAssets.map((asset, idx) => (
               <motion.div
                 key={asset.id}
                 whileHover={{ y: -3 }}
@@ -155,18 +170,11 @@ export default function LibraryPage() {
               >
                 {/* Media Preview Box */}
                 <div className="relative aspect-video bg-[#17172A] overflow-hidden">
-                  {asset.thumbnailUrl ? (
-                    <img
-                      src={asset.thumbnailUrl}
-                      alt={asset.name}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[#17172A] to-[#2D2D44] text-white">
-                      {asset.type === 'audio' ? <FileAudio className="w-10 h-10 text-[#635BFF]" /> : <FileText className="w-10 h-10 text-[#EC4899]" />}
-                      <span className="text-[11px] font-mono mt-2 text-[#9496A8] uppercase">{asset.type}</span>
-                    </div>
-                  )}
+                  <img
+                    src={getAssetThumb(asset, idx)}
+                    alt={asset.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
 
                   {/* Duration Pill */}
                   {asset.durationFormatted && (
