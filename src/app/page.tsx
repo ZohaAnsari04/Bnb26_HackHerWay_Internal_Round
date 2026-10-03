@@ -18,7 +18,12 @@ import {
   TrendingUp,
   Cpu,
   Zap,
-  Globe
+  Globe,
+  Upload,
+  Flame,
+  Check,
+  FileVideo,
+  Clock
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { ScoreRing } from '@/components/ScoreRing';
@@ -28,12 +33,214 @@ import { ColorfulBackgroundGlow } from '@/components/ColorfulBackgroundGlow';
 import { NavBar } from '@/components/ui/tubelight-navbar';
 
 export default function LandingPage() {
-  const steps = [
-    { num: '01', title: 'Upload', desc: 'Drop any podcast, video, or keynote. We extract studio-quality audio in seconds.' },
-    { num: '02', title: 'Understand', desc: 'Whisper large-v3 transcribes phonemes while semantic models cluster themes and topics.' },
-    { num: '03', title: 'Create', desc: 'Algorithms detect high-retention hooks and crop subjects with responsive framing.' },
-    { num: '04', title: 'Adapt', desc: 'One click formats dimensions, writes platform-specific copy, and generates hashtags.' },
-    { num: '05', title: 'Publish', desc: 'Queue scheduled posts into an editorial calendar synced to your social channels.' },
+  const pipelineSteps = [
+    {
+      num: '01',
+      stage: 'INGESTION',
+      title: 'Upload',
+      subtitle: 'Lossless Media Intake',
+      desc: 'Drop any podcast, video, or keynote. We extract studio-grade 48kHz audio and lossless 4K video in seconds.',
+      icon: Upload,
+      gradient: 'from-[#635BFF] via-[#7C3AED] to-[#8B5CF6]',
+      glowColor: 'rgba(99, 91, 255, 0.25)',
+      badgeColor: 'text-[#635BFF] bg-[#635BFF]/10 border-[#635BFF]/20',
+      stat: '⚡ 4.2s Transcode',
+      preview: (
+        <div className="rounded-2xl bg-white/90 border border-[#635BFF]/15 p-3 shadow-xs flex flex-col justify-between h-[142px]">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1.5">
+              <div className="w-6 h-6 rounded-lg bg-[#635BFF]/10 flex items-center justify-center text-[#635BFF]">
+                <FileVideo className="w-3.5 h-3.5" />
+              </div>
+              <div className="text-left">
+                <p className="text-[11px] font-bold text-[#17172A] truncate max-w-[85px]">podcast_ep42.mp4</p>
+                <p className="text-[9px] text-[#68697A]">4K • 60fps • 48kHz</p>
+              </div>
+            </div>
+            <span className="text-[8px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-200">
+              Lossless
+            </span>
+          </div>
+          
+          <div className="flex items-center justify-center gap-1.5 h-8 my-1 px-2 py-1 rounded-xl bg-slate-50/80">
+            <span className="w-1.5 rounded-full bg-gradient-to-t from-[#635BFF] to-[#A855F7] animate-audio-bar-1" />
+            <span className="w-1.5 rounded-full bg-gradient-to-t from-[#635BFF] to-[#A855F7] animate-audio-bar-2" />
+            <span className="w-1.5 rounded-full bg-gradient-to-t from-[#635BFF] to-[#A855F7] animate-audio-bar-3" />
+            <span className="w-1.5 rounded-full bg-gradient-to-t from-[#635BFF] to-[#A855F7] animate-audio-bar-4" />
+            <span className="w-1.5 rounded-full bg-gradient-to-t from-[#635BFF] to-[#A855F7] animate-audio-bar-5" />
+            <span className="w-1.5 rounded-full bg-gradient-to-t from-[#635BFF] to-[#A855F7] animate-audio-bar-6" />
+            <span className="w-1.5 rounded-full bg-gradient-to-t from-[#635BFF] to-[#A855F7] animate-audio-bar-7" />
+          </div>
+
+          <div className="flex items-center justify-between text-[10px] text-[#68697A] border-t border-slate-100 pt-1">
+            <span className="flex items-center gap-1 text-[#635BFF] font-medium text-[9px]">
+              <Sparkles className="w-2.5 h-2.5" /> High-Fidelity
+            </span>
+            <span className="font-semibold text-emerald-600 text-[9px]">Ready</span>
+          </div>
+        </div>
+      ),
+    },
+    {
+      num: '02',
+      stage: 'COGNITIVE',
+      title: 'Understand',
+      subtitle: 'Neural Speech & Topics',
+      desc: 'Whisper large-v3 transcribes phonemes while deep semantic models cluster themes, tone shifts, and topic clusters.',
+      icon: Cpu,
+      gradient: 'from-[#06B6D4] via-[#0284C7] to-[#3B82F6]',
+      glowColor: 'rgba(6, 182, 212, 0.25)',
+      badgeColor: 'text-[#06B6D4] bg-[#06B6D4]/10 border-[#06B6D4]/20',
+      stat: '99.8% Precision',
+      preview: (
+        <div className="rounded-2xl bg-white/90 border border-[#06B6D4]/15 p-3 shadow-xs flex flex-col justify-between h-[142px]">
+          <div className="flex flex-wrap gap-1">
+            <span className="text-[8px] font-semibold px-1.5 py-0.5 rounded-full bg-[#06B6D4]/10 text-[#0284C7] border border-[#06B6D4]/20">
+              #AI-Scale
+            </span>
+            <span className="text-[8px] font-semibold px-1.5 py-0.5 rounded-full bg-amber-50 text-amber-600 border border-amber-200">
+              #Retention
+            </span>
+            <span className="text-[8px] font-semibold px-1.5 py-0.5 rounded-full bg-purple-50 text-purple-600 border border-purple-200">
+              #ViralHook
+            </span>
+          </div>
+
+          <div className="my-1 p-1.5 rounded-xl bg-slate-50/80 border border-slate-100 text-left">
+            <p className="text-[9px] text-[#17172A] font-medium leading-snug line-clamp-2 italic">
+              &quot;...the reason 90% of creators fail isn&apos;t quality, it&apos;s pacing...&quot;
+            </p>
+          </div>
+
+          <div className="flex items-center justify-between text-[10px] text-[#68697A] border-t border-slate-100 pt-1">
+            <span className="flex items-center gap-1 text-[#0284C7] font-medium text-[9px]">
+              <Cpu className="w-2.5 h-2.5" /> Whisper-v3
+            </span>
+            <span className="font-semibold text-sky-600 text-[9px]">99.8%</span>
+          </div>
+        </div>
+      ),
+    },
+    {
+      num: '03',
+      stage: 'DIRECTOR',
+      title: 'Create',
+      subtitle: 'Smart Framing & Hooks',
+      desc: 'Algorithms detect high-retention emotional hooks and crop subjects with intelligent responsive face framing.',
+      icon: Scissors,
+      gradient: 'from-[#EC4899] via-[#F43F5E] to-[#FB7185]',
+      glowColor: 'rgba(236, 72, 153, 0.25)',
+      badgeColor: 'text-[#EC4899] bg-[#EC4899]/10 border-[#EC4899]/20',
+      stat: '94 Virality Score',
+      preview: (
+        <div className="rounded-2xl bg-white/90 border border-[#EC4899]/15 p-3 shadow-xs flex flex-col justify-between h-[142px]">
+          <div className="flex items-center justify-between">
+            <span className="text-[8px] font-bold px-1.5 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200 flex items-center gap-1">
+              <Flame className="w-2.5 h-2.5 text-rose-500 fill-rose-500" /> 94 Score
+            </span>
+            <span className="text-[8px] font-mono text-[#68697A]">02:14 - 02:46</span>
+          </div>
+
+          <div className="relative my-1 h-9 rounded-xl bg-gradient-to-r from-rose-500/10 via-pink-500/10 to-purple-500/10 border border-rose-200/50 flex items-center justify-between px-2.5">
+            <div className="flex items-center gap-1">
+              <div className="w-1.5 h-1.5 rounded-full bg-rose-500 animate-pulse" />
+              <span className="text-[9px] font-bold text-[#17172A]">9:16 Crop</span>
+            </div>
+            <span className="text-[8px] px-1 py-0.5 rounded bg-white font-mono text-rose-600 font-bold shadow-2xs">
+              Face Centered
+            </span>
+          </div>
+
+          <div className="flex items-center justify-between text-[10px] text-[#68697A] border-t border-slate-100 pt-1">
+            <span className="text-[#EC4899] font-medium text-[9px]">Autocut Model</span>
+            <span className="font-semibold text-rose-600 text-[9px]">32s Hook</span>
+          </div>
+        </div>
+      ),
+    },
+    {
+      num: '04',
+      stage: 'MULTI-FORMAT',
+      title: 'Adapt',
+      subtitle: 'Copy & Multi-Aspect',
+      desc: 'One click formats dimensions, writes platform-specific copy, and generates hashtags tailored for each algorithm.',
+      icon: Layers,
+      gradient: 'from-[#8B5CF6] via-[#7C3AED] to-[#635BFF]',
+      glowColor: 'rgba(139, 92, 246, 0.25)',
+      badgeColor: 'text-[#8B5CF6] bg-[#8B5CF6]/10 border-[#8B5CF6]/20',
+      stat: '3 Dimensions',
+      preview: (
+        <div className="rounded-2xl bg-white/90 border border-[#8B5CF6]/15 p-3 shadow-xs flex flex-col justify-between h-[142px]">
+          <div className="grid grid-cols-3 gap-1">
+            <div className="p-1 rounded-lg bg-[#8B5CF6]/15 border border-[#8B5CF6]/30 text-center">
+              <span className="text-[8px] font-bold text-[#7C3AED] block">9:16</span>
+              <span className="text-[7px] text-[#68697A]">Reels</span>
+            </div>
+            <div className="p-1 rounded-lg bg-slate-50 border border-slate-200/60 text-center">
+              <span className="text-[8px] font-semibold text-[#17172A] block">1:1</span>
+              <span className="text-[7px] text-[#68697A]">Feed</span>
+            </div>
+            <div className="p-1 rounded-lg bg-slate-50 border border-slate-200/60 text-center">
+              <span className="text-[8px] font-semibold text-[#17172A] block">16:9</span>
+              <span className="text-[7px] text-[#68697A]">Web</span>
+            </div>
+          </div>
+
+          <div className="p-1 rounded-lg bg-slate-50/80 border border-slate-100 text-left">
+            <p className="text-[8px] text-[#68697A] truncate font-mono">
+              &quot;Stop manually editing clips... 🧵👇 #ai&quot;
+            </p>
+          </div>
+
+          <div className="flex items-center justify-between text-[10px] text-[#68697A] border-t border-slate-100 pt-1">
+            <span className="text-[#8B5CF6] font-medium text-[9px]">#viral #creator</span>
+            <span className="font-semibold text-purple-600 flex items-center gap-0.5 text-[9px]">
+              <Check className="w-2.5 h-2.5" /> Synthesized
+            </span>
+          </div>
+        </div>
+      ),
+    },
+    {
+      num: '05',
+      stage: 'DISTRIBUTE',
+      title: 'Publish',
+      subtitle: 'Zero-Click Syndication',
+      desc: 'Queue scheduled posts into an editorial calendar synced directly to TikTok, YouTube, Instagram & LinkedIn.',
+      icon: Share2,
+      gradient: 'from-[#10B981] via-[#059669] to-[#06B6D4]',
+      glowColor: 'rgba(16, 185, 129, 0.25)',
+      badgeColor: 'text-[#10B981] bg-[#10B981]/10 border-[#10B981]/20',
+      stat: '4 Platforms',
+      preview: (
+        <div className="rounded-2xl bg-white/90 border border-[#10B981]/15 p-3 shadow-xs flex flex-col justify-between h-[142px]">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-1">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-[8px] font-bold text-emerald-700">Auto-Queued</span>
+            </div>
+            <span className="text-[8px] text-[#68697A] font-medium">Tomorrow, 09:30 AM</span>
+          </div>
+
+          <div className="my-1 p-1.5 rounded-xl bg-slate-50/80 border border-slate-100 flex items-center justify-between">
+            <span className="text-[8px] font-semibold text-[#17172A]">Direct Sync</span>
+            <div className="flex items-center gap-1">
+              <span className="w-4 h-4 rounded-full bg-rose-500/10 text-rose-600 text-[8px] font-bold flex items-center justify-center">YT</span>
+              <span className="w-4 h-4 rounded-full bg-pink-500/10 text-pink-600 text-[8px] font-bold flex items-center justify-center">IG</span>
+              <span className="w-4 h-4 rounded-full bg-blue-500/10 text-blue-600 text-[8px] font-bold flex items-center justify-center">LI</span>
+              <span className="w-4 h-4 rounded-full bg-slate-900/10 text-slate-900 text-[8px] font-bold flex items-center justify-center">TT</span>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between text-[10px] text-[#68697A] border-t border-slate-100 pt-1">
+            <span className="flex items-center gap-1 text-emerald-600 font-medium text-[9px]">
+              <CheckCircle2 className="w-2.5 h-2.5" /> Synced to Calendar
+            </span>
+            <span className="font-semibold text-emerald-600 text-[9px]">Active</span>
+          </div>
+        </div>
+      ),
+    },
   ];
 
   const navItems = [
@@ -287,36 +494,123 @@ export default function LandingPage() {
         </motion.div>
       </section>
 
-      {/* How It Works Section */}
-      <section id="how-it-works" className="py-20 px-6 border-t border-[rgba(20,20,40,0.06)] bg-white/75 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#635BFF]">
-              Unified Creator Architecture
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-[#17172A] mt-2">
-              From one asset to a syndication engine
+      {/* How It Works Section - Redesigned Interactive Workflow Pipeline */}
+      <section id="how-it-works" className="py-24 px-6 border-t border-[rgba(20,20,40,0.06)] bg-white/70 backdrop-blur-md relative overflow-hidden">
+        {/* Soft background ambient glow spots */}
+        <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-96 bg-[#635BFF]/5 rounded-full blur-3xl pointer-events-none -z-10" />
+        <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-96 h-96 bg-[#EC4899]/5 rounded-full blur-3xl pointer-events-none -z-10" />
+
+        <div className="max-w-7xl mx-auto">
+          {/* Section Header */}
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/95 border border-[#635BFF]/20 shadow-xs mb-4 backdrop-blur-sm">
+              <span className="flex h-2 w-2 rounded-full bg-[#635BFF] animate-ping" />
+              <span className="text-xs font-bold text-[#635BFF] tracking-wider uppercase">
+                Unified Creator Architecture
+              </span>
+            </div>
+            
+            <h2 className="text-3xl sm:text-5xl font-bold tracking-tight text-[#17172A] mt-2 font-serif leading-tight">
+              From one asset to a{' '}
+              <span className="bg-gradient-to-r from-[#635BFF] via-[#EC4899] to-[#06B6D4] bg-clip-text text-transparent">
+                syndication engine
+              </span>
             </h2>
-            <p className="text-sm sm:text-base text-[#68697A] mt-3">
-              No more switching between transcription software, Premiere, caption generators, and scheduling spreadsheets.
+            
+            <p className="text-sm sm:text-base text-[#68697A] mt-4 leading-relaxed max-w-2xl mx-auto">
+              No more switching between transcription software, Premiere, caption generators, and scheduling spreadsheets. One autonomous pipeline turns hours of raw content into viral multi-platform distributions.
             </p>
+
+            {/* Pipeline Latency Ribbon */}
+            <div className="mt-6 inline-flex items-center gap-3 px-4 py-2 rounded-2xl bg-gradient-to-r from-[#635BFF]/6 via-[#EC4899]/6 to-[#06B6D4]/6 border border-[rgba(20,20,40,0.06)] text-xs font-medium text-[#17172A] shadow-xs">
+              <span className="flex items-center gap-1.5 text-[#635BFF] font-semibold">
+                <Zap className="w-3.5 h-3.5 fill-[#635BFF]" /> Fully Autonomous
+              </span>
+              <span className="text-slate-300">•</span>
+              <span>5 Core Operations</span>
+              <span className="text-slate-300">•</span>
+              <span className="text-[#06B6D4] font-semibold">~42s Total Latency</span>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-            {steps.map((st) => (
-              <div
-                key={st.num}
-                className="p-5 rounded-2xl bg-[#FAFAF7] border border-[rgba(20,20,40,0.06)] hover:border-[#635BFF]/25 hover:shadow-xs transition-all flex flex-col justify-between"
-              >
-                <div>
-                  <span className="text-2xl font-black text-[#635BFF]/30 block mb-2 font-mono">
-                    {st.num}
-                  </span>
-                  <h3 className="text-base font-bold text-[#17172A]">{st.title}</h3>
-                  <p className="text-xs text-[#68697A] mt-2 leading-relaxed">{st.desc}</p>
+          {/* Connected Pipeline Flow Line for Desktop */}
+          <div className="hidden lg:flex items-center justify-between max-w-5xl mx-auto mb-8 px-10 relative">
+            <div className="absolute top-1/2 left-16 right-16 h-0.5 bg-gradient-to-r from-[#635BFF]/30 via-[#EC4899]/30 to-[#10B981]/30 -translate-y-1/2 -z-0" />
+            {pipelineSteps.map((st) => (
+              <div key={st.num} className="relative z-10 flex flex-col items-center">
+                <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold font-mono transition-transform duration-300 hover:scale-110 shadow-xs border bg-white ${st.badgeColor}`}>
+                  {st.num}
                 </div>
+                <span className="text-[10px] font-bold text-[#68697A] mt-1.5 uppercase tracking-wider">
+                  {st.title}
+                </span>
               </div>
             ))}
+          </div>
+
+          {/* The 5 Cards Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4.5 relative">
+            {pipelineSteps.map((st, index) => {
+              const Icon = st.icon;
+              return (
+                <motion.div
+                  key={st.num}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.08 }}
+                  className="group relative flex flex-col justify-between rounded-3xl p-5 bg-white/90 backdrop-blur-xl border border-[rgba(20,20,40,0.08)] hover:border-transparent transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[0_20px_40px_-15px_rgba(99,91,255,0.18)]"
+                >
+                  {/* Glowing background gradient border on hover */}
+                  <div
+                    className={`absolute -inset-[1.5px] rounded-3xl bg-gradient-to-b ${st.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-[0.5px]`}
+                  />
+
+                  {/* Top glowing accent line */}
+                  <div className={`h-1.5 w-12 rounded-full bg-gradient-to-r ${st.gradient} mb-4 group-hover:w-full transition-all duration-500`} />
+
+                  {/* Header: Stage Pill & Icon */}
+                  <div className="flex items-center justify-between mb-3">
+                    <span className={`text-[10px] font-bold font-mono px-2.5 py-1 rounded-full border ${st.badgeColor}`}>
+                      STEP {st.num}
+                    </span>
+                    <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${st.badgeColor} group-hover:scale-110 transition-transform duration-300 shadow-2xs`}>
+                      <Icon className="w-4 h-4" />
+                    </div>
+                  </div>
+
+                  {/* Titles */}
+                  <div className="mb-2 text-left">
+                    <h3 className="text-lg font-bold text-[#17172A] tracking-tight group-hover:text-[#635BFF] transition-colors">
+                      {st.title}
+                    </h3>
+                    <p className="text-[11px] font-medium text-[#68697A]">
+                      {st.subtitle}
+                    </p>
+                  </div>
+
+                  {/* Micro-UI Visual Preview */}
+                  <div className="my-2 transition-transform duration-300 group-hover:scale-[1.02]">
+                    {st.preview}
+                  </div>
+
+                  {/* Description */}
+                  <p className="text-xs text-[#68697A] mt-2 leading-relaxed text-left">
+                    {st.desc}
+                  </p>
+
+                  {/* Bottom Stat Chip */}
+                  <div className="mt-4 pt-3 border-t border-[rgba(20,20,40,0.06)] flex items-center justify-between">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#9496A8]">
+                      {st.stage}
+                    </span>
+                    <span className="text-[11px] font-semibold text-[#17172A]">
+                      {st.stat}
+                    </span>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -481,6 +481,27 @@ p, span, div, a, button, input, textarea, select, label, table, nav {
   animation: ambient-glow-drift-2 15s ease-in-out infinite;
 }
 
+/* Audio waveform bounce animations for pipeline cards */
+@keyframes audio-wave-pulse {
+  0%, 100% {
+    height: 8px;
+    opacity: 0.55;
+  }
+  50% {
+    height: 28px;
+    opacity: 1;
+  }
+}
+
+.animate-audio-bar-1 { animation: audio-wave-pulse 1.1s ease-in-out infinite; }
+.animate-audio-bar-2 { animation: audio-wave-pulse 0.85s ease-in-out infinite 0.15s; }
+.animate-audio-bar-3 { animation: audio-wave-pulse 1.35s ease-in-out infinite 0.3s; }
+.animate-audio-bar-4 { animation: audio-wave-pulse 0.95s ease-in-out infinite 0.1s; }
+.animate-audio-bar-5 { animation: audio-wave-pulse 1.2s ease-in-out infinite 0.25s; }
+.animate-audio-bar-6 { animation: audio-wave-pulse 0.8s ease-in-out infinite 0.35s; }
+.animate-audio-bar-7 { animation: audio-wave-pulse 1.15s ease-in-out infinite 0.05s; }
+
+
 
 
 
