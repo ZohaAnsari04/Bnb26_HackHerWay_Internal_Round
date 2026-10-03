@@ -287,8 +287,9 @@ CreatorAI includes a dual **Live API / Demo Mode** switch in the top navigation 
 
 ## 👥 Authors & Team
 
-Developed with ❤️ for **HackHerWay 2026** by the **CreatorAI Team**.
+Developed with ❤️ for **HackHerWay 2026** by Team **`:HackHerWay:`**.
 
+- **Team**: `:HackHerWay:`
 - **GitHub**: [@ZohaAnsari04](https://github.com/ZohaAnsari04)
 - **Repository**: [Bnb26_HackHerWay_Internal_Round](https://github.com/ZohaAnsari04/Bnb26_HackHerWay_Internal_Round)
 

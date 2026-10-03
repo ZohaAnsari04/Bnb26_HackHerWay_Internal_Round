@@ -982,10 +982,13 @@ export default function LandingPage() {
               className="w-5 h-5 object-contain"
             />
             <span className="font-semibold text-[#17172A]">CreatorAI Content Operations</span>
-            <span>• Hackathon Edition</span>
+            <span>•</span>
+            <span className="font-bold text-[#635BFF] bg-[#635BFF]/10 px-2 py-0.5 rounded-md border border-[#635BFF]/20">
+              Team :HackHerWay:
+            </span>
           </div>
           <div>
-            Built with Next.js, FastAPI, Whisper, and Creator Intelligence Architecture.
+            Built with ❤️ by Team <strong className="text-[#17172A] font-bold">:HackHerWay:</strong> for HackHerWay 2026
           </div>
         </div>
       </footer>
