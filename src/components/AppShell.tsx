@@ -17,12 +17,20 @@ interface AppShellProps {
 
 export function AppShell({ children }: AppShellProps) {
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-[#FAFAF7]">
+    <div className="relative flex h-screen w-screen overflow-hidden bg-[#F7F8FC]">
+      {/* Dynamic Vivid Colorful Ambient Lighting Orbs across all pages */}
+      <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <div className="absolute -top-[15%] right-[5%] w-[700px] h-[700px] rounded-full bg-gradient-to-br from-[#635BFF]/22 via-[#EC4899]/16 to-transparent blur-[110px]" />
+        <div className="absolute top-[25%] -left-[10%] w-[600px] h-[600px] rounded-full bg-gradient-to-tr from-[#06B6D4]/20 via-[#3B82F6]/16 to-transparent blur-[110px]" />
+        <div className="absolute top-[55%] right-[15%] w-[500px] h-[500px] rounded-full bg-gradient-to-br from-[#EC4899]/18 via-[#8B5CF6]/15 to-transparent blur-[110px]" />
+        <div className="absolute -bottom-[15%] left-[20%] w-[650px] h-[650px] rounded-full bg-gradient-to-tl from-[#10B981]/18 via-[#F59E0B]/14 to-transparent blur-[120px]" />
+      </div>
+
       {/* Collapsible Left Sidebar */}
       <Sidebar />
 
       {/* Main Column */}
-      <div className="flex-1 flex flex-col h-full min-w-0 overflow-hidden">
+      <div className="relative z-10 flex-1 flex flex-col h-full min-w-0 overflow-hidden">
         {/* Sticky Topbar */}
         <Topbar />
 

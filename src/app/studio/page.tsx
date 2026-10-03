@@ -338,7 +338,7 @@ export default function StudioPage() {
                     <div className="p-3 rounded-2xl bg-[#FAFAF7] border border-[rgba(20,20,40,0.06)] hover:border-[#635BFF]/20 transition-colors">
                       <span className="text-[10px] text-[#68697A] block font-semibold uppercase tracking-wider">Topic</span>
                       <span className="font-bold text-[#17172A] mt-1 block truncate">
-                        {activeProject?.topics[0] || 'AI Development'}
+                        {activeProject?.topics?.[0] || 'AI Development'}
                       </span>
                     </div>
                     <div className="p-3 rounded-2xl bg-[#FAFAF7] border border-[rgba(20,20,40,0.06)] hover:border-[#635BFF]/20 transition-colors">
@@ -360,7 +360,10 @@ export default function StudioPage() {
                       Key Themes
                     </span>
                     <div className="flex flex-wrap gap-2">
-                      {(activeProject?.keyThemes || ['AI', 'Productivity', 'Software Engineering']).map((theme) => (
+                      {(Array.isArray(activeProject?.keyThemes) && activeProject.keyThemes.length > 0
+                        ? activeProject.keyThemes
+                        : ['AI', 'Productivity', 'Software Engineering']
+                      ).map((theme) => (
                         <span
                           key={theme}
                           className="px-3 py-1 text-xs font-semibold rounded-xl bg-[#F7F8FC] border border-[rgba(20,20,40,0.08)] text-[#17172A] shadow-2xs hover:border-[#635BFF]/30 transition-colors"

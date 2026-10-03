@@ -29,7 +29,15 @@ class SQLiteDatabaseClient {
         description TEXT,
         assetType TEXT DEFAULT 'video',
         status TEXT DEFAULT 'draft',
-        duration INTEGER,
+        duration TEXT DEFAULT '10:42',
+        durationSeconds INTEGER DEFAULT 642,
+        thumbnailUrl TEXT DEFAULT '',
+        opportunityPotential INTEGER DEFAULT 84,
+        topics TEXT DEFAULT '[]',
+        tone TEXT DEFAULT 'Educational & Authoritative',
+        targetAudience TEXT DEFAULT 'Software Developers',
+        keyThemes TEXT DEFAULT '[]',
+        analysisComplete INTEGER DEFAULT 1,
         createdAt TEXT NOT NULL,
         updatedAt TEXT NOT NULL
       );
@@ -97,33 +105,88 @@ class SQLiteDatabaseClient {
         createdAt TEXT NOT NULL
       );
     `);
+
+    // Run graceful schema migrations for existing dev.db
+    const projectMigrations = [
+      "ALTER TABLE projects ADD COLUMN durationSeconds INTEGER DEFAULT 642",
+      "ALTER TABLE projects ADD COLUMN thumbnailUrl TEXT DEFAULT ''",
+      "ALTER TABLE projects ADD COLUMN opportunityPotential INTEGER DEFAULT 84",
+      "ALTER TABLE projects ADD COLUMN topics TEXT DEFAULT '[]'",
+      "ALTER TABLE projects ADD COLUMN tone TEXT DEFAULT 'Educational & Authoritative'",
+      "ALTER TABLE projects ADD COLUMN targetAudience TEXT DEFAULT 'Software Developers'",
+      "ALTER TABLE projects ADD COLUMN keyThemes TEXT DEFAULT '[]'",
+      "ALTER TABLE projects ADD COLUMN analysisComplete INTEGER DEFAULT 1",
+    ];
+    for (const sql of projectMigrations) {
+      try {
+        this.db.exec(sql);
+      } catch (e) {}
+    }
   }
 
   private seedIfEmpty() {
     const row = this.db.prepare('SELECT count(*) as count FROM projects').get() as { count: number };
-    if (row && row.count > 0) return;
-
-    // Insert Projects
-    const insertProj = this.db.prepare(`
-      INSERT INTO projects (id, title, description, assetType, status, duration, createdAt, updatedAt)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    `);
-    for (const p of INITIAL_PROJECTS) {
-      insertProj.run(
-        p.id,
-        p.title,
-        p.description || '',
-        p.assetType,
-        p.status,
-        p.durationSeconds || 600,
-        p.createdAt,
-        new Date().toISOString()
-      );
+    if (!row || row.count === 0) {
+      // Insert Projects
+      const insertProj = this.db.prepare(`
+        INSERT INTO projects (
+          id, title, description, assetType, status, duration, durationSeconds,
+          thumbnailUrl, opportunityPotential, topics, tone, targetAudience, keyThemes,
+          analysisComplete, createdAt, updatedAt
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `);
+      for (const p of INITIAL_PROJECTS) {
+        insertProj.run(
+          p.id,
+          p.title,
+          p.description || '',
+          p.assetType,
+          p.status,
+          p.duration || '10:42',
+          p.durationSeconds || 600,
+          p.thumbnailUrl || '',
+          p.opportunityPotential || 84,
+          JSON.stringify(p.topics || []),
+          p.tone || 'Educational & Authoritative',
+          p.targetAudience || 'Software Developers',
+          JSON.stringify(p.keyThemes || []),
+          p.analysisComplete ? 1 : 0,
+          p.createdAt,
+          new Date().toISOString()
+        );
+      }
+    } else {
+      // Sync initial metadata if topics is empty
+      try {
+        const updateProj = this.db.prepare(`
+          UPDATE projects SET
+            topics = ?,
+            tone = ?,
+            targetAudience = ?,
+            keyThemes = ?,
+            opportunityPotential = ?,
+            thumbnailUrl = ?,
+            durationSeconds = ?
+          WHERE id = ? AND (topics IS NULL OR topics = '[]' OR topics = '')
+        `);
+        for (const p of INITIAL_PROJECTS) {
+          updateProj.run(
+            JSON.stringify(p.topics || []),
+            p.tone || 'Educational & Authoritative',
+            p.targetAudience || 'Software Developers',
+            JSON.stringify(p.keyThemes || []),
+            p.opportunityPotential || 84,
+            p.thumbnailUrl || '',
+            p.durationSeconds || 642,
+            p.id
+          );
+        }
+      } catch (e) {}
     }
 
-    // Insert Assets
+    // Insert Assets (idempotent)
     const insertAsset = this.db.prepare(`
-      INSERT INTO assets (id, projectId, name, type, sizeBytes, durationSeconds, durationFormatted, thumbnailUrl, fileUrl, status, topics, createdAt)
+      INSERT OR IGNORE INTO assets (id, projectId, name, type, sizeBytes, durationSeconds, durationFormatted, thumbnailUrl, fileUrl, status, topics, createdAt)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
     for (const a of INITIAL_ASSETS) {
@@ -143,9 +206,9 @@ class SQLiteDatabaseClient {
       );
     }
 
-    // Insert Opportunities
+    // Insert Opportunities (idempotent)
     const insertOpp = this.db.prepare(`
-      INSERT INTO opportunities (id, projectId, title, hookText, startTime, endTime, startFormatted, endFormatted, duration, score, factorsJson, whyItWorksJson, suggestedPlatforms, isGenerated, createdAt)
+      INSERT OR IGNORE INTO opportunities (id, projectId, title, hookText, startTime, endTime, startFormatted, endFormatted, duration, score, factorsJson, whyItWorksJson, suggestedPlatforms, isGenerated, createdAt)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
     for (const opp of INITIAL_OPPORTUNITIES) {
@@ -168,9 +231,9 @@ class SQLiteDatabaseClient {
       );
     }
 
-    // Insert Clips
+    // Insert Clips (idempotent)
     const insertClip = this.db.prepare(`
-      INSERT INTO clips (id, projectId, opportunityId, title, hookText, duration, durationFormatted, aspectRatio, platform, score, thumbnailUrl, videoUrl, status, captionStyleJson, createdAt)
+      INSERT OR IGNORE INTO clips (id, projectId, opportunityId, title, hookText, duration, durationFormatted, aspectRatio, platform, score, thumbnailUrl, videoUrl, status, captionStyleJson, createdAt)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
     for (const c of INITIAL_CLIPS) {
@@ -193,9 +256,9 @@ class SQLiteDatabaseClient {
       );
     }
 
-    // Insert Calendar Events
+    // Insert Calendar Events (idempotent)
     const insertEvent = this.db.prepare(`
-      INSERT INTO calendar_events (id, clipId, title, platform, scheduledTime, status, copyText, hashtags, createdAt)
+      INSERT OR IGNORE INTO calendar_events (id, clipId, title, platform, scheduledTime, status, copyText, hashtags, createdAt)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
     for (const ev of INITIAL_CALENDAR_EVENTS) {
@@ -214,17 +277,51 @@ class SQLiteDatabaseClient {
   }
 
   // --- Project Repository ---
+  private formatProjectRow(r: any) {
+    if (!r) return null;
+    let topics: string[] = ['Artificial Intelligence', 'Software Engineering', 'AI Agents'];
+    let keyThemes: string[] = ['AI Operating Systems', 'Developer Productivity', 'Autonomous Agents'];
+    try {
+      if (r.topics) {
+        const parsed = typeof r.topics === 'string' ? JSON.parse(r.topics) : r.topics;
+        if (Array.isArray(parsed) && parsed.length > 0) topics = parsed;
+      }
+    } catch {}
+
+    try {
+      if (r.keyThemes) {
+        const parsed = typeof r.keyThemes === 'string' ? JSON.parse(r.keyThemes) : r.keyThemes;
+        if (Array.isArray(parsed) && parsed.length > 0) keyThemes = parsed;
+      }
+    } catch {}
+
+    return {
+      ...r,
+      durationSeconds: r.durationSeconds || (typeof r.duration === 'number' ? r.duration : 642),
+      duration: typeof r.duration === 'string' ? r.duration : '10:42',
+      thumbnailUrl: r.thumbnailUrl || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80',
+      status: r.status || 'ready',
+      opportunityPotential: r.opportunityPotential || 84,
+      topics,
+      tone: r.tone || 'Educational & Authoritative',
+      targetAudience: r.targetAudience || 'Software Developers',
+      keyThemes,
+      analysisComplete: Boolean(r.analysisComplete ?? true),
+    };
+  }
+
   project = {
     findMany: async (args?: any) => {
       const rows = this.db.prepare('SELECT * FROM projects ORDER BY createdAt DESC').all() as any[];
       return rows.map((r) => {
+        const formatted = this.formatProjectRow(r);
         const oppCount = (this.db.prepare('SELECT count(*) as c FROM opportunities WHERE projectId = ?').get(r.id) as any)?.c || 0;
         const clipCount = (this.db.prepare('SELECT count(*) as c FROM clips WHERE projectId = ?').get(r.id) as any)?.c || 0;
         const assetCount = (this.db.prepare('SELECT count(*) as c FROM assets WHERE projectId = ?').get(r.id) as any)?.c || 0;
         const assets = this.db.prepare('SELECT * FROM assets WHERE projectId = ?').all(r.id) as any[];
 
         return {
-          ...r,
+          ...formatted,
           _count: {
             opportunities: oppCount,
             clips: clipCount,
@@ -239,12 +336,13 @@ class SQLiteDatabaseClient {
       const proj = this.db.prepare('SELECT * FROM projects WHERE id = ?').get(where.id) as any;
       if (!proj) return null;
 
+      const formatted = this.formatProjectRow(proj);
       const assets = this.db.prepare('SELECT * FROM assets WHERE projectId = ?').all(proj.id);
       const opportunities = this.db.prepare('SELECT * FROM opportunities WHERE projectId = ?').all(proj.id);
       const clips = this.db.prepare('SELECT * FROM clips WHERE projectId = ?').all(proj.id);
 
       return {
-        ...proj,
+        ...formatted,
         assets,
         opportunities,
         clips,
