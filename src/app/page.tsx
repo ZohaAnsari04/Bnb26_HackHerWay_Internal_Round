@@ -323,6 +323,7 @@ export default function LandingPage() {
             height={46}
             className="h-10 w-auto object-contain transition-transform group-hover:scale-[1.02]"
             priority
+            unoptimized
           />
         </Link>
 
@@ -980,6 +981,7 @@ export default function LandingPage() {
               width={20}
               height={20}
               className="w-5 h-5 object-contain"
+              unoptimized
             />
             <span className="font-semibold text-[#17172A]">CreatorAI Content Operations</span>
             <span>•</span>

@@ -27,6 +27,7 @@ export function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
+  const [logoError, setLogoError] = useState(false);
   const { setIsUploadModalOpen } = useApp();
 
   const navItems = [
@@ -106,15 +107,25 @@ export function Sidebar() {
         <div className="h-16 px-5 border-b border-[rgba(20,20,40,0.06)] flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2.5 overflow-hidden group">
             {/* Logo Mark: iridescent play button with glow */}
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#635BFF]/10 via-[#EC4899]/10 to-[#06B6D4]/10 flex items-center justify-center shrink-0 border border-white/60 shadow-xs">
-              <Image
-                src="/logo-icon.png"
-                alt="CreatorAI"
-                width={36}
-                height={36}
-                className="w-8 h-8 object-contain transition-transform group-hover:scale-105"
-                priority
-              />
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#635BFF]/10 via-[#EC4899]/10 to-[#06B6D4]/10 flex items-center justify-center shrink-0 border border-white/60 shadow-xs overflow-hidden">
+              {!logoError ? (
+                <Image
+                  src="/logo-icon.png"
+                  alt="CreatorAI"
+                  width={36}
+                  height={36}
+                  className="w-8 h-8 object-contain transition-transform group-hover:scale-105"
+                  priority
+                  unoptimized
+                  onError={() => setLogoError(true)}
+                />
+              ) : (
+                <div className="w-7 h-7 rounded-lg bg-gradient-to-tr from-[#635BFF] via-[#EC4899] to-[#06B6D4] flex items-center justify-center shadow-xs">
+                  <svg className="w-3.5 h-3.5 text-white fill-white ml-0.5" viewBox="0 0 24 24">
+                    <path d="M5 3l14 9-14 9V3z" />
+                  </svg>
+                </div>
+              )}
             </div>
 
             {!collapsed && (
