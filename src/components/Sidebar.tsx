@@ -91,10 +91,6 @@ export function Sidebar() {
     { label: 'Settings', href: '/settings', icon: Settings, color: '#68697A' },
   ];
 
-  // Map active route to index for LineSidebar
-  const currentNavIndex = navItems.findIndex(
-    (item) => pathname === item.href || (item.href !== '/dashboard' && pathname?.startsWith(item.href))
-  );
 
   return (
     <aside
